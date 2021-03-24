@@ -1,3 +1,5 @@
+转载自 [Deno 运行时入门教程：Node.js 的替代品](http://www.ruanyifeng.com/blog/2020/01/deno-intro.html)
+
 # Deno 运行时入门教程：Node.js 的替代品
 
 这几天假期，我学习了一下 [Deno](https://deno.land/)。它是 Node.js 的替代品。有了它，将来可能就不需要 Node.js 了。
