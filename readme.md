@@ -6,3 +6,5 @@
 - [Deno 将停用 TypeScript 的五个原因](/src/front/deno/src/4-denostopts.md)
 - [Deno 会对 Node 造成威胁吗？](/src/front/deno/src/5-denovsnode.md)
 - [使用 Deno 和 Oak 构建 CRUD API](/src/front/deno/src/6-denooak.md)
+## net 
+- [CORS 完全手册](/src/front/net/src/1-CORS-huli.md)
