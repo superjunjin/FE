@@ -8,3 +8,5 @@
 - [使用 Deno 和 Oak 构建 CRUD API](/src/front/deno/src/6-denooak.md)
 ## net 
 - [CORS 完全手册](/src/front/net/src/1-CORS-huli.md)
+## 综合
+- [精读《高性能表格》](/src/front/other/src/1-front-excel.md)]
