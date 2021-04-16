@@ -9,4 +9,6 @@
 ## net 
 - [CORS 完全手册](/src/front/net/src/1-CORS-huli.md)
 ## 综合
-- [精读《高性能表格》](/src/front/other/src/1-front-excel.md)]
+- [精读《高性能表格》](/src/front/other/src/1-front-excel.md)
+## React
+- [React状态管理库及如何选择？](/src/front/react/src/1-react-state.md)
