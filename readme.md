@@ -12,3 +12,4 @@
 - [精读《高性能表格》](/src/front/other/src/1-front-excel.md)
 ## React
 - [React状态管理库及如何选择？](/src/front/react/src/1-react-state.md)
+- [React vs. Vue 谁是2021年最佳JavaScript框架](/src/front/react/src/2-React-vs-Vue-2021.md)
