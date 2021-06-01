@@ -1,6 +1,8 @@
+# 1-react-state
+
 转自 [React状态管理库及如何选择？](https://mp.weixin.qq.com/s/jrxaa3iJBb6X9tMqbmiFNw)
 
-https://daveceddia.com/react-state-management/
+[https://daveceddia.com/react-state-management/](https://daveceddia.com/react-state-management/)
 
 前言
 
@@ -36,9 +38,9 @@ React及其生态系统提供了很多不同的方式来存储和管理这种状
 
 对于存储，你可以...
 
-- 将这些变量保存在本地组件状态中--无论是使用hooks（useState或useReducer）还是类（this.state和this.setState）。
-- 将数据保存在存储中，使用第三方库，如Redux、MobX、Recoil或Zustand。
-- 甚至可以全局地将它们保留在Window对象上。
+* 将这些变量保存在本地组件状态中--无论是使用hooks（useState或useReducer）还是类（this.state和this.setState）。
+* 将数据保存在存储中，使用第三方库，如Redux、MobX、Recoil或Zustand。
+* 甚至可以全局地将它们保留在Window对象上。
 
 React不在乎你把数据放在哪里，但是...
 
@@ -50,13 +52,13 @@ React不在乎你把数据放在哪里，但是...
 
 有些框架会 "观察 "事物，并进行相应的更新。Angular、Svelte和Vue等都做到了这一点。
 
-==但React没有。它不会 "观察变化 "并神奇地重新渲染。你(或者其他什么)需要告诉它去做那件事==。
+==但React没有。它不会 "观察变化 "并神奇地重新渲染。你\(或者其他什么\)需要告诉它去做那件事==。
 
-- 使用useState、useReducer或this.setState(类)，当你调用其中一个setter函数时，React会重新渲染。
-- 如果你将数据保存在Redux、MobX、Recoil或其他存储中，那么当一些东西发生变化时，该存储将告诉React，并为你触发重渲染。
-- 如果你选择在窗口window上全局保留数据，你需要告诉React在你改变该数据后更新。
+* 使用useState、useReducer或this.setState\(类\)，当你调用其中一个setter函数时，React会重新渲染。
+* 如果你将数据保存在Redux、MobX、Recoil或其他存储中，那么当一些东西发生变化时，该存储将告诉React，并为你触发重渲染。
+* 如果你选择在窗口window上全局保留数据，你需要告诉React在你改变该数据后更新。
 
-哦，你要完全清楚，我不建议将你的状态全局地保存在窗口window上，因为通常来说，全局数据是要避免的。混乱的代码，难以理解等等等等。我提到这一点只是想说这是可以的，想说明React真的不在乎它的数据来自哪里 :)
+哦，你要完全清楚，我不建议将你的状态全局地保存在窗口window上，因为通常来说，全局数据是要避免的。混乱的代码，难以理解等等等等。我提到这一点只是想说这是可以的，想说明React真的不在乎它的数据来自哪里 :\)
 
 ### 什么时候useState不够用？
 
@@ -68,13 +70,13 @@ React不在乎你把数据放在哪里，但是...
 
 （哦，例如对一个数值的增加啊，减少啊，重置啊，等等操作。要放在一起统一管理比较清晰）
 
-https://zh-hans.reactjs.org/docs/hooks-reference.html#usereducer
+[https://zh-hans.reactjs.org/docs/hooks-reference.html\#usereducer](https://zh-hans.reactjs.org/docs/hooks-reference.html#usereducer)
 
 ### 接下来，useReducer
 
 从useState "向上"的下一步是useReducer。reducer函数为你提供了一个集中的地方来拦截"操作"并相应地更新状态。一个 useReducer 调用，就像 useState 一样，只能容纳一个值，==但有了 reducer，更常见的是这个单一的值是一个包含多个值的对象==。useReducer hooks让管理该对象变得更加容易。
 
-### 用Context避免Prop Drilling 
+### 用Context避免Prop Drilling
 
 > 就是避免爷爷爷组件到孙孙孙子组件的一层一层的向下传Prop
 
@@ -117,7 +119,7 @@ function ComponentThatNeedsData() {
 
 另一个要避免的性能问题是每次都向Provider的值中传递一个全新的对象。它看起来很无害，而且很容易被忽略。下面是一个例子。
 
-(一般不会按下例这么写)
+\(一般不会按下例这么写\)
 
 ```jsx
 function TheComponentWithState() {
@@ -142,9 +144,9 @@ function TheComponentWithState() {
 
 ### Learn More
 
-- [Official docs](https://reactjs.org/docs/context.html)
-- My egghead course on [React Context for State Management](https://egghead.io/courses/react-context-for-state-management)
-- Context is covered in my [Pure React book](https://daveceddia.com/pure-react/) and [Pure React workshop course](https://purereact.com/)
+* [Official docs](https://reactjs.org/docs/context.html)
+* My egghead course on [React Context for State Management](https://egghead.io/courses/react-context-for-state-management)
+* Context is covered in my [Pure React book](https://daveceddia.com/pure-react/) and [Pure React workshop course](https://purereact.com/)
 
 ## 第三方状态管理库
 
@@ -160,25 +162,25 @@ function TheComponentWithState() {
 
 #### 优点
 
-- 自2015年以来一直处于试验阶段
-- 官方的[Redux Toolkit](https://redux-toolkit.js.org/)库减少了模板代码。
-- 优秀的开发工具让调试变得简单
-- Time travel调试
-- bundle size小（redux+react-redux约为3kb）。
-- 功能性的风格意味着很少有幕后隐藏的东西
-- 有自己的库生态系统，用于做一些事情，如同步到localStorage，管理API请求，以及更多。
+* 自2015年以来一直处于试验阶段
+* 官方的[Redux Toolkit](https://redux-toolkit.js.org/)库减少了模板代码。
+* 优秀的开发工具让调试变得简单
+* Time travel调试
+* bundle size小（redux+react-redux约为3kb）。
+* 功能性的风格意味着很少有幕后隐藏的东西
+* 有自己的库生态系统，用于做一些事情，如同步到localStorage，管理API请求，以及更多。
 
 #### **缺点**
 
-- 心智模型需要一些时间来理解，特别是当你不熟悉函数式编程的时候
-- 对不可变性的严重依赖会使编写reducer变得很麻烦(通过添加 [Immer](https://github.com/immerjs/immer)库，或使用包含Immer的[Redux Toolkit](https://redux-toolkit.js.org/)来缓解这一问题)
-- 要求你对所有的事情都要明确（这可能是赞成或反对，取决于你喜欢什么）。
+* 心智模型需要一些时间来理解，特别是当你不熟悉函数式编程的时候
+* 对不可变性的严重依赖会使编写reducer变得很麻烦\(通过添加 [Immer](https://github.com/immerjs/immer)库，或使用包含Immer的[Redux Toolkit](https://redux-toolkit.js.org/)来缓解这一问题\)
+* 要求你对所有的事情都要明确（这可能是赞成或反对，取决于你喜欢什么）。
 
 #### Learn More
 
-- [Redux Docs](https://redux.js.org/)
-- My free [Redux Tutorial](https://daveceddia.com/redux-tutorial/)
-- My paid course [Pure Redux](https://daveceddia.com/pure-redux/)
+* [Redux Docs](https://redux.js.org/)
+* My free [Redux Tutorial](https://daveceddia.com/redux-tutorial/)
+* My paid course [Pure Redux](https://daveceddia.com/pure-redux/)
 
 ### MobX
 
@@ -192,25 +194,22 @@ MobX在幕后使用ES6 Proxies来检测变化，所以更新可观察的数据�
 
 #### **优点**
 
-- 以真正的 "反应式 "方式管理状态，因此当你修改一个值时，任何使用该值的组件都会自动重新渲染。
-
-- 不需要任何actions或者reducers，只需修改你的状态，应用程序就会反映出来。
-
-- 神奇的反应性意味着写更少的代码。
-
-- 你可以编写常规的可变性代码。不需要特殊的setter函数或不可变性immutability。
+* 以真正的 "反应式 "方式管理状态，因此当你修改一个值时，任何使用该值的组件都会自动重新渲染。
+* 不需要任何actions或者reducers，只需修改你的状态，应用程序就会反映出来。
+* 神奇的反应性意味着写更少的代码。
+* 你可以编写常规的可变性代码。不需要特殊的setter函数或不可变性immutability。
 
 #### **缺点**
 
-- 不像Redux那样广泛使用，所以社区支持较少（教程等），但在用户中深受喜爱
-- 神奇的反应性意味着更少的明文代码。(这可能是一个优点或缺点，取决于你对自动更新 "魔法 "的感觉)
-- 要求使用ES6 Proxies，意味着不支持IE11及以下版本。(如果你的应用需要支持IE，那么旧版本的MobX可以不需要Proxies)
+* 不像Redux那样广泛使用，所以社区支持较少（教程等），但在用户中深受喜爱
+* 神奇的反应性意味着更少的明文代码。\(这可能是一个优点或缺点，取决于你对自动更新 "魔法 "的感觉\)
+* 要求使用ES6 Proxies，意味着不支持IE11及以下版本。\(如果你的应用需要支持IE，那么旧版本的MobX可以不需要Proxies\)
 
 #### Learn More
 
-- Official [Intro to MobX and React](https://mobx.js.org/getting-started.html)
-- [Mobx on Github](https://github.com/mobxjs/mobx)
-- Free [MobX video course on egghead](https://egghead.io/courses/manage-complex-state-in-react-apps-with-mobx) by its creator Michel Weststrate
+* Official [Intro to MobX and React](https://mobx.js.org/getting-started.html)
+* [Mobx on Github](https://github.com/mobxjs/mobx)
+* Free [MobX video course on egghead](https://egghead.io/courses/manage-complex-state-in-react-apps-with-mobx) by its creator Michel Weststrate
 
 ### MobX状态树
 
@@ -218,7 +217,7 @@ MobX状态树（或MST）是在MobX之上的一层，它给你提供了一个==�
 
 下面是一个模型的例子。
 
-```js
+```javascript
 const TodoStore = types
   .model('TodoStore', {
     loaded: types.boolean,
@@ -255,24 +254,22 @@ MST的一个很好的用例是存储领域模型数据。它可以表示对象�
 
 #### **优点**
 
-- 类型系统保证了你的数据将是一个一致的形状。
-
-- 自动跟踪依赖关系意味着MST可以智能地只重新渲染需要渲染的组件。
-- 变更是以颗粒状补丁流的形式创建的。
-- 简单地对整个或部分状态进行可序列化的JSON快照。
+* 类型系统保证了你的数据将是一个一致的形状。
+* 自动跟踪依赖关系意味着MST可以智能地只重新渲染需要渲染的组件。
+* 变更是以颗粒状补丁流的形式创建的。
+* 简单地对整个或部分状态进行可序列化的JSON快照。
 
 #### **缺点**
 
-- 你需要学习MST的类型系统。
-- 魔力与显性的权衡
-
-- 补丁、快照和动作的一些性能开销。如果你的数据变化非常快，MST可能不是最合适的。
+* 你需要学习MST的类型系统。
+* 魔力与显性的权衡
+* 补丁、快照和动作的一些性能开销。如果你的数据变化非常快，MST可能不是最合适的。
 
 #### Learn More
 
-- [mobx-state-tree on Github](https://github.com/mobxjs/mobx-state-tree)
-- Official [Getting Started Tutorial](https://mobx-state-tree.js.org/intro/getting-started)
-- Free [MobX State Tree course on egghead](https://egghead.io/courses/manage-application-state-with-mobx-state-tree) by the creator
+* [mobx-state-tree on Github](https://github.com/mobxjs/mobx-state-tree)
+* Official [Getting Started Tutorial](https://mobx-state-tree.js.org/intro/getting-started)
+* Free [MobX State Tree course on egghead](https://egghead.io/courses/manage-application-state-with-mobx-state-tree) by the creator
 
 ### Recoil
 
@@ -308,14 +305,14 @@ function LanguageSelector() {
 
 #### 优点
 
-- 与 React 非常相似的简单 API
-- 它被Facebook用在他们的一些内部工具中。
-- 为性能而设计
-- 可与React Suspense一起工作，也可不与React Suspense一起工作（在撰写本文时，React Suspense仍在试验阶段）。
+* 与 React 非常相似的简单 API
+* 它被Facebook用在他们的一些内部工具中。
+* 为性能而设计
+* 可与React Suspense一起工作，也可不与React Suspense一起工作（在撰写本文时，React Suspense仍在试验阶段）。
 
 #### **缺点**
 
-- 这个库成立才几个月，所以社区资源和最佳实践还没有其他库那么强大。
+* 这个库成立才几个月，所以社区资源和最佳实践还没有其他库那么强大。
 
 ### React-Query
 
@@ -325,69 +322,70 @@ React-Query与列表中的其他库不同，因为它是一个获取数据的库
 
 #### 优点
 
-- 将数据保存在每个组件都能访问的缓存中。
-- 可以自动重新获取(停滞-同时-验证、窗口重新聚焦、轮询/实时)
-- 支持获取分页数据
-- 支持 "加载更多 "和无限滚动数据，包括滚动位置恢复。
-- 你可以使用任何HTTP库（fetch，axios等）或后端（REST，GraphQL）。
-- 支持React Suspense，但不要求它。
-- 并行+依赖性查询
-- 突变+反应式重取（"在我更新这个项目后，重取整个列表"）。
-- 支持取消请求
-- 用自己的React Query Devtools进行良好的调试。
-- bundle尺寸小（6.5k minified + gzipped）。
+* 将数据保存在每个组件都能访问的缓存中。
+* 可以自动重新获取\(停滞-同时-验证、窗口重新聚焦、轮询/实时\)
+* 支持获取分页数据
+* 支持 "加载更多 "和无限滚动数据，包括滚动位置恢复。
+* 你可以使用任何HTTP库（fetch，axios等）或后端（REST，GraphQL）。
+* 支持React Suspense，但不要求它。
+* 并行+依赖性查询
+* 突变+反应式重取（"在我更新这个项目后，重取整个列表"）。
+* 支持取消请求
+* 用自己的React Query Devtools进行良好的调试。
+* bundle尺寸小（6.5k minified + gzipped）。
 
 #### **缺点**
 
-- 如果你的要求很简单，可能会矫枉过正。
+* 如果你的要求很简单，可能会矫枉过正。
 
 #### Learn More
 
-- [react-query on Github](https://github.com/tannerlinsley/react-query)
-- This [conference talk by the creator](https://youtu.be/seU46c6Jz7E)
-- Plenty of [examples in the docs](https://github.com/tannerlinsley/react-query#examples)
+* [react-query on Github](https://github.com/tannerlinsley/react-query)
+* This [conference talk by the creator](https://youtu.be/seU46c6Jz7E)
+* Plenty of [examples in the docs](https://github.com/tannerlinsley/react-query#examples)
 
 ### XState
 
 最后一个也不是真正意义上的状态管理库，和这个列表中的其他库一样，但它非常有用！
 
-XState用JavaScript（和React，但它可以与任何框架一起使用)）实现了**状态机**和状态图表。状态机是一个 "众所周知 "的想法（在学术文献的意义上），已经存在了几十年，它们在解决棘手的状态问题方面做得非常好。
+XState用JavaScript（和React，但它可以与任何框架一起使用\)）实现了**状态机**和状态图表。状态机是一个 "众所周知 "的想法（在学术文献的意义上），已经存在了几十年，它们在解决棘手的状态问题方面做得非常好。
 
 当很难推理出一个系统可以采取的所有不同组合和状态时，状态机是一个很好的解决方案。
 
 举个例子，想象一个复杂的自定义输入，比如Stripe公司的那些花哨的信用卡号码输入--这些输入能够精确地知道什么时候在数字之间插入空格，以及将光标放在哪里。
 
-现在想想：当用户点击右键时，你应该怎么做？嗯，这取决于光标的位置。而这取决于框中的文字是什么(光标是否在我们需要跳过的空格附近?没有?)。而且也许他们按住Shift键，你需要调整所选区域......有很多变量在起作用。你可以看到这将如何变得复杂。
+现在想想：当用户点击右键时，你应该怎么做？嗯，这取决于光标的位置。而这取决于框中的文字是什么\(光标是否在我们需要跳过的空格附近?没有?\)。而且也许他们按住Shift键，你需要调整所选区域......有很多变量在起作用。你可以看到这将如何变得复杂。
 
 手工管理这种事情是很棘手的，而且容易出错，因此使用状态机，你可以列出系统可能处于的所有状态，以及它们之间的转换。XState将帮助你做到这一点。
 
 #### 优点
 
-- 简单的基于对象的API来表示状态和它们的转换。
-- 可以处理复杂的情况，如平行状态
-- [XState Visualizer](https://xstate.js.org/viz/)对于调试和步入状态机真的很不错。
-- 状态机可以大幅简化复杂的问题。
+* 简单的基于对象的API来表示状态和它们的转换。
+* 可以处理复杂的情况，如平行状态
+* [XState Visualizer](https://xstate.js.org/viz/)对于调试和步入状态机真的很不错。
+* 状态机可以大幅简化复杂的问题。
 
 #### **缺点**
 
-- 用状态机思考 "需要适应一下
-- 状态机描述对象可能会变得相当啰嗦（但是，想象一下，用手写它
+* 用状态机思考 "需要适应一下
+* 状态机描述对象可能会变得相当啰嗦（但是，想象一下，用手写它
 
 #### Learn More
 
-- [Official docs](https://xstate.js.org/)
-- free [video course on egghead](https://egghead.io/courses/introduction-to-state-machines-using-xstate)
+* [Official docs](https://xstate.js.org/)
+* free [video course on egghead](https://egghead.io/courses/introduction-to-state-machines-using-xstate)
 
 ## "X怎么办？"
 
-还有很多库我在这里没有篇幅介绍，比如Zustand、easy-peasy等。不过可以看看这些，它们也不错：)
+还有很多库我在这里没有篇幅介绍，比如Zustand、easy-peasy等。不过可以看看这些，它们也不错：\)
 
 ## 学习状态管理的技巧
 
-小例子对学习很有好处，但往往会让一个库显得矫枉过正。("谁需要Redux来做TODO列表?" "为什么你要为一个模态对话框使用整个状态机？")
+小例子对学习很有好处，但往往会让一个库显得矫枉过正。\("谁需要Redux来做TODO列表?" "为什么你要为一个模态对话框使用整个状态机？"\)
 
-大的例子很适合将一件事付诸实践，但作为介绍往往让人觉得太难。("哇，这些状态机的东西看起来太复杂了")
+大的例子很适合将一件事付诸实践，但作为介绍往往让人觉得太难。\("哇，这些状态机的东西看起来太复杂了"\)
 
 就我个人而言，当我刚开始接触一件事情的时候，我会先从那些 "愚蠢 "的小例子开始，即使我真正的目标是更大的事情。我发现现实世界的例子很容易让人迷失在草丛中。
 
-祝你在自己的状态管理之路上好运：)
+祝你在自己的状态管理之路上好运：\)
+

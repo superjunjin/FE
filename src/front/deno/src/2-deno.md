@@ -2,29 +2,29 @@
 
 A **secure** runtime for **JavaScript** and **TypeScript**.
 
-(Deno为**JavaScript**和**TypeScript**提供安全的运行时环境)
+\(Deno为**JavaScript**和**TypeScript**提供安全的运行时环境\)
 
 Deno is a simple, modern and secure runtime for JavaScript and TypeScript that uses V8 and is built in Rust.
 
- (Deno为**JavaScript**和**TypeScript**提供简单的，现代的和安全的运行时环境，它是使用V8引擎的并且用Rust语言开发而成)
+\(Deno为**JavaScript**和**TypeScript**提供简单的，现代的和安全的运行时环境，它是使用V8引擎的并且用Rust语言开发而成\)
 
-- Secure by default. No file, network, or environment access, unless explicitly enabled.
+* Secure by default. No file, network, or environment access, unless explicitly enabled.
 
   （默认安全的，除非显式使用，否则不能访问文件，网络，环境等）
 
-- Supports TypeScript out of the box.
+* Supports TypeScript out of the box.
 
   （支持TypeScript的开箱即用）
 
-- Ships only a single executable file.
+* Ships only a single executable file.
 
   （只发布一个可执行文件。）
 
-- Has built-in utilities like a dependency inspector (`deno info`) and a code formatter (`deno fmt`).
+* Has built-in utilities like a dependency inspector \(`deno info`\) and a code formatter \(`deno fmt`\).
 
   （具有内置的工具，如依赖检查器和代码格式化器）
 
-- Has a set of reviewed (audited) standard modules that are guaranteed to work with Deno: [deno.land/std](https://deno.land/std)
+* Has a set of reviewed \(audited\) standard modules that are guaranteed to work with Deno: [deno.land/std](https://deno.land/std)
 
   （有一组经过审查的标准模块可以保证与Deno一起工作）
 
@@ -34,55 +34,55 @@ Deno ships as a single executable with no dependencies. You can install it using
 
 （Deno作为一个单独的可执行文件发布，没有依赖关系。您可以使用下面的安装程序安装它，或者从发布页面下载发布二进制文件。）
 
-Shell (Mac, Linux):
+Shell \(Mac, Linux\):
 
-```
+```text
 curl -fsSL https://deno.land/x/install/install.sh | sh
 ```
 
-PowerShell (Windows):
+PowerShell \(Windows\):
 
-```
+```text
 iwr https://deno.land/x/install/install.ps1 -useb | iex
 ```
 
-[Homebrew](https://formulae.brew.sh/formula/deno) (Mac):
+[Homebrew](https://formulae.brew.sh/formula/deno) \(Mac\):
 
-```
+```text
 brew install deno
 ```
 
-[Chocolatey](https://chocolatey.org/packages/deno) (Windows):
+[Chocolatey](https://chocolatey.org/packages/deno) \(Windows\):
 
-```
+```text
 choco install deno
 ```
 
-[Scoop](https://scoop.sh/) (Windows):
+[Scoop](https://scoop.sh/) \(Windows\):
 
-```
+```text
 scoop install deno
 ```
 
 Build and install from source using [Cargo](https://crates.io/crates/deno):
 
-```
+```text
 cargo install deno --locked
 ```
 
-See [deno_install](https://github.com/denoland/deno_install) for more installation options.
+See [deno\_install](https://github.com/denoland/deno_install) for more installation options.
 
 ## [Getting Started](https://deno.land/#getting-started)
 
 Try running a simple program:
 
-```
+```text
 deno run https://deno.land/std/examples/welcome.ts
 ```
 
-Or a more complex one: 
+Or a more complex one:
 
-```js
+```javascript
 import { serve } from "https://deno.land/std@0.90.0/http/server.ts";
 const s = serve({ port: 8000 });
 console.log("http://localhost:8000/");
@@ -93,7 +93,7 @@ for await (const req of s) {
 
 You can find a more in depth introduction, examples, and environment setup guides in [the manual](https://deno.land/manual).
 
-(您可以在手册中找到更深入的介绍、示例和环境设置指南。)
+\(您可以在手册中找到更深入的介绍、示例和环境设置指南。\)
 
 ## [Runtime Documentation](https://deno.land/#runtime-documentation)
 
@@ -130,3 +130,4 @@ To make it easier to consume third party modules Deno provides some built in too
 deno.land also provides a simple public hosting service for ES modules that work with Deno. It can be found at [deno.land/x](https://deno.land/x).
 
 （deno.land还为与Deno合作的ES模块提供了简单的公共托管服务。 可以在deno.land/x中找到。）
+
