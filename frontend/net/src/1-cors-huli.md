@@ -67,7 +67,7 @@ API 也是這樣，只是變成程式跟程式之間的串接。例如說今天�
 
 剛剛前面有提過檔案存取的例子，其實這個比較像是呼叫作業系統或是程式語言的函式庫提供的 Function，而這些 Function 你通常都可以在官方文件上查到更詳細的說明，例如說 Node.js 的讀取檔案：
 
-（來源：https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback）
+（來源：[https://nodejs.org/api/fs.html\#fs\_fs\_readdir\_path\_options\_callback）](https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback）)
 
 上面就有寫說你應該呼叫哪一個 Function，應該傳入哪些參數。
 
@@ -100,7 +100,7 @@ var count = 10000000;
 while(count--) {
   // 做一些耗時的操作
 }
-  
+
 // 等很久才被執行到
 console.log('done')
 ```
@@ -110,7 +110,7 @@ console.log('done')
 ```javascript
 // 假設有個發送 Request 的函式叫做 sendRequest
 var result = sendRequest('https://api.twitch.tv/kraken/games/top?client_id=xxx');
-  
+
 // 等很久才被執行到
 console.log(result);
 ```
@@ -124,7 +124,7 @@ console.log(result);
 ```javascript
 // 假設有個發送 Request 的函式叫做 sendRequest
 var result = sendRequest('https://api.twitch.tv/kraken/games/top?client_id=xxx');
-  
+
 // 上面 Request 發送完之後就執行到這一行，所以 result 不會有東西
 // 因為 Response 根本沒有回來
 console.log(result);
@@ -138,8 +138,7 @@ console.log(result);
 
 所以我不需要站在店家門口等，我只要在位子上繼續坐我的事情，反正餐點好了之後老闆會送過來。
 
-非同步的概念也是這樣，我發送 Request 之後（我點餐之後），我不用等 Response 回來（不用等老闆做好），可以繼續做自己的事，等
-Response 回來之後（等餐點做好之後），會自己幫我把結果送過來（老闆會自己送過來）。
+非同步的概念也是這樣，我發送 Request 之後（我點餐之後），我不用等 Response 回來（不用等老闆做好），可以繼續做自己的事，等 Response 回來之後（等餐點做好之後），會自己幫我把結果送過來（老闆會自己送過來）。
 
 在點餐的例子中，老闆可以透過桌號知道應該把資料送到哪邊，那在 JavaScript 裡面呢？可以透過 Function！而這個 Function，我們就稱作==Callback Function==，回呼函式。
 
@@ -148,11 +147,11 @@ Response 回來之後（等餐點做好之後），會自己幫我把結果送�
 ```javascript
 // 假設有個發送 Request 的函式叫做 sendRequest
 sendRequest('https://api.twitch.tv/kraken/games/top?client_id=xxx', callMe);
-  
+
 function callMe (response) {
   console.log(response);
 }
-  
+
 // 或者寫成匿名函式
 sendRequest('https://api.twitch.tv/kraken/games/top?client_id=xxx', function (response) {
   console.log(response);
@@ -172,7 +171,7 @@ var request = new XMLHttpRequest();
 request.open('GET', `https://api.twitch.tv/kraken/games/top?client_id=xxx`, true);
 request.onload = function() {
   if (request.status >= 200 && request.status < 400) {
-  
+
     // Success!
     console.log(request.responseText);
   }
@@ -195,7 +194,6 @@ XMLHttpRequest cannot load
 http://odata.tn.edu.tw/ebookapi/api/getOdataJH/?level=all. 
 No 'Access-Control-Allow-Origin' header is present on the 
 requested resource. Origin 'null' is therefore not allowed access.
-
 ```
 
 咦？為什麼會有這個錯誤呢？
@@ -228,7 +226,7 @@ CORS，全名為 Cross-Origin HTTP request，跨來源 HTTP 請求。
 
 如果你打開 Devtool 仔細看一開始我們發給 Twitch 的 Request，你會發現 Response 的 Header 大概是長這樣：
 
-```
+```text
 Content-Type: application/json
 Content-Length: 71
 Connection: keep-alive
@@ -252,7 +250,7 @@ Timing-Allow-Origin: https://www.twitch.tv
 
 還記得 Twitch 的 API 文件嗎？裡面需要帶一個`client-id`的參數，而文件裡面寫說你可以帶在 GET 的參數上面，也可以帶在 Header 裡，我們來試試看帶在 Header 裡會怎樣吧！打開 Devtool，你會看到一個神奇的現象：
 
-![cors2](../img/cors2.png)
+![cors2](../../../../.gitbook/assets/cors2.png)
 
 咦？我明明只發了一個 Request，怎麼變兩個了？而且第一個的 Method 居然是`OPTIONS`。只是多加了一個 Header 就多了一個 Request，是為什麼呢？
 
@@ -339,16 +337,14 @@ var response = {
 
 URL: `https://api.twitch.tv/kraken/games/top?client_id=xxx&callback=aaa&limit=1`
 
-```
+```text
 aaa({"_total":1069,"_links":{"self":"https://api.twitch.tv/kraken/games/top?limit=1","next":"https://api.twitch.tv/kraken/games/top?limit=1\u0026offset=1"},"top":[{"game":{"name":"Dota 2","popularity":63361,"_id":29595,"giantbomb_id":32887,"box":{"large":"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-272x380.jpg","medium":"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-136x190.jpg","small":"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-52x72.jpg","template":"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-{width}x{height}.jpg"},"logo":{"large":"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-240x144.jpg","medium":"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-120x72.jpg","small":"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-60x36.jpg","template":"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-{width}x{height}.jpg"},"_links":{},"localized_name":"Dota 2","locale":"zh-tw"},"viewers":65243,"channels":373}]})
-
 ```
 
 URL: `https://api.twitch.tv/kraken/games/top?client_id=xxx&callback=receiveData&limit=1`
 
-```
+```text
 receiveData({"_total":1067,"_links":{"self":"https://api.twitch.tv/kraken/games/top?limit=1","next":"https://api.twitch.tv/kraken/games/top?limit=1\u0026offset=1"},"top":[{"game":{"name":"Dota 2","popularity":63361,"_id":29595,"giantbomb_id":32887,"box":{"large":"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-272x380.jpg","medium":"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-136x190.jpg","small":"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-52x72.jpg","template":"https://static-cdn.jtvnw.net/ttv-boxart/Dota%202-{width}x{height}.jpg"},"logo":{"large":"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-240x144.jpg","medium":"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-120x72.jpg","small":"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-60x36.jpg","template":"https://static-cdn.jtvnw.net/ttv-logoart/Dota%202-{width}x{height}.jpg"},"_links":{},"localized_name":"Dota 2","locale":"zh-tw"},"viewers":65622,"channels":376}]})
-
 ```
 
 有發現了嗎？它就是透過你帶過去的`callback`這個參數當作函式名稱，把 JavaScript 物件整個傳到 Function 裡面，你就可以在 Function 裡面拿到資料。
@@ -374,7 +370,7 @@ receiveData({"_total":1067,"_links":{"self":"https://api.twitch.tv/kraken/games/
 
 一般來說，跟前端抓資料有關的東西我基本上都提到了，不過有個遺珠之憾是沒有提到[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)，這是比較新的標準，也是拿來抓資料用的，MDN 上面的介紹是：
 
-> The Fetch API provides an interface for fetching resources (including across the network). It will seem familiar to anyone who has used XMLHttpRequest, but the new API provides a more powerful and flexible feature set.
+> The Fetch API provides an interface for fetching resources \(including across the network\). It will seem familiar to anyone who has used XMLHttpRequest, but the new API provides a more powerful and flexible feature set.
 
 有興趣的讀者們可以自己去看一下。
 
@@ -434,8 +430,8 @@ receiveData({"_total":1067,"_links":{"self":"https://api.twitch.tv/kraken/games/
 
 既然CORS 的这个错误是出在「跨来源呼叫API」，那势必就要两件事情要厘清：
 
-- 什么是跨来源？
-- 为什么不能跨来源呼叫API？
+* 什么是跨来源？
+* 为什么不能跨来源呼叫API？
 
 ### 什么是跨来源？
 
@@ -449,11 +445,11 @@ receiveData({"_total":1067,"_links":{"self":"https://api.twitch.tv/kraken/games/
 
 所以呢，
 
-- https://huli.tw跟https://huli.tw/api/api同源，因为scheme + host + port都一样（是path的部分，不是host）
-- https://huli.tw跟http://huli.tw不同源，因为scheme不一样
-- http://huli.tw跟http://huli.tw:3000不同源，因为port不一样
-- https://api.huli.tw跟https://data.huli.tw不同源，因为host不一样
-- https://huli.tw跟https://api.huli.tw不同源，因为host不一样
+* [https://huli.tw跟https://huli.tw/api/api同源，因为scheme](https://huli.tw跟https://huli.tw/api/api同源，因为scheme) + host + port都一样（是path的部分，不是host）
+* [https://huli.tw跟http://huli.tw不同源，因为scheme不一样](https://huli.tw跟http://huli.tw不同源，因为scheme不一样)
+* [http://huli.tw跟http://huli.tw:3000不同源，因为port不一样](http://huli.tw跟http://huli.tw:3000不同源，因为port不一样)
+* [https://api.huli.tw跟https://data.huli.tw不同源，因为host不一样](https://api.huli.tw跟https://data.huli.tw不同源，因为host不一样)
+* [https://huli.tw跟https://api.huli.tw不同源，因为host不一样](https://huli.tw跟https://api.huli.tw不同源，因为host不一样)
 
 第五点是大家要特别注意的一点，domain跟subdomain之间也是不同源的，所以api.huli.tw跟huli.tw不同源。有很多人常常会把这个跟cookie搞混，==因为api.huli.tw跟huli.tw是可以共用cookie的==。
 
@@ -516,7 +512,7 @@ receiveData({"_total":1067,"_links":{"self":"https://api.twitch.tv/kraken/games/
 
 如果瀏覽器沒有擋跨來源的 API，那我就可以寫一段這樣的程式碼：
 
-```
+```text
 // 發出 request 得到資料
 function sendRequest(url, callback) {
   const request = new XMLHttpRequest();
@@ -695,7 +691,7 @@ JavaScript 是一個程式語言，所以像 `var`、`if else`、`for`、`functi
 
 把安全機制關掉以後，就可以順利拿到 response，瀏覽器也會跳一個提示出來：
 
-![disable-browser](../img/disable-browser.png)
+![disable-browser](../../../../.gitbook/assets/disable-browser.png)
 
 問題是解決了，但為什麼我說這是治標不治本呢？因為只有在你電腦上沒問題而已，==在其他人的電腦上面還是有問題==。有些人會在開發時圖個方便把這個設置關起來，就不會碰到任何 CORS 的問題，但我認為這是比較不好的做法，==因為你關掉的不只是 CORS，你連其他安全機制也一起關掉了==。
 
@@ -718,7 +714,7 @@ fetch('http://localhost:3000').then(res => {
 
 你就會看到 console 上面跳出顯眼的紅字：
 
-```
+```text
 Access to fetch at ‘http://localhost:3000/’ from origin ‘http://localhost:8081’ has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource. If an opaque response serves your needs, set the request’s mode to ‘no-cors’ to fetch the resource with CORS disabled.
 ```
 
@@ -737,7 +733,7 @@ fetch('http://localhost:3000', {
 
 改了程式碼之後重新執行，果真不會跳錯誤出來了！console 一片乾淨，只是印出來的值似乎怪怪的：
 
-![opaque](../img/opaque.png)
+![opaque](../../../../.gitbook/assets/opaque.png)
 
 Response 的 status 是 0，body 的內容是空的，type 是一個叫做 `opaque` 的東西，看起來很奇怪。但如果我們打開 devtool 並且切到 Network 的那一個 tab 去看，會發現其實後端是有回傳 response 的。
 
@@ -805,7 +801,7 @@ app.listen(3000, function () {
 
 接著呢，我們的前端可以這樣寫：
 
-```html
+```markup
 <!DOCTYPE html>
 
 <html>
@@ -826,7 +822,7 @@ app.listen(3000, function () {
 
 不過在實務上，我們其實事先不會知道要拿誰的資料，而是使用者做出一些動作之後，我們才去拿相對應 id 的資料，因此這個 script 就會是動態新增的，像是這樣：
 
-```html
+```markup
 <!DOCTYPE html>
 
 <html>
@@ -871,13 +867,13 @@ app.get('/users/:userId', function (req, res) {
 
 你拿到的 response 就會長得像這樣：
 
-```
+```text
 setData({"name":"user1"})
 ```
 
 其實就是把之前的變數宣告換成傳入 function 而已。而這個 `setData` 就是你要寫在前端來接收資料的 function：
 
-```html
+```markup
 <!DOCTYPE html>
 
 <html>
@@ -968,7 +964,7 @@ JSONP 的原理是透過 script 標籤傳遞資料跨過限制，而一般我們
 
 還記得一開始用 fetch 時出現的那個錯誤嗎？
 
-> Access to fetch at ‘http://localhost:3000/’ from origin ‘[http://localhost:8081](http://localhost:8081/)’ has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource. If an opaque response serves your needs, set the request’s mode to ‘no-cors’ to fetch the resource with CORS disabled.
+> Access to fetch at ‘[http://localhost:3000/’](http://localhost:3000/’) from origin ‘[http://localhost:8081](http://localhost:8081/)’ has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource. If an opaque response serves your needs, set the request’s mode to ‘no-cors’ to fetch the resource with CORS disabled.
 
 重点是這一句：No ‘Access-Control-Allow-Origin’ header is present on the requested resource
 
@@ -978,7 +974,7 @@ JSONP 的原理是透過 script 標籤傳遞資料跨過限制，而一般我們
 
 那如果想要允許多個來源呢？抱歉，你沒辦法在 header 內放入多個 origin，==你只能放一個==，或是你可以選擇放 `*`，就代表允許任何 origin 的意思。如果想要針對多個 origin，server 那邊必須做一點額外處理。
 
-這邊我們先來看放 * 的情形：
+這邊我們先來看放 \* 的情形：
 
 ```javascript
 var express = require('express');
@@ -1033,7 +1029,7 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 
 如果你想拿 A 網站的資料，但是它沒有提供 `Access-Control-Allow-Origin` 這個 header，你就自己寫個 server，從後端去拿 A 網站的資料，再把資料丟回給自己的前端就行了。因為自己的後端可以自己控制，所以你想加什麼 header 就加什麼 header，想拿什麼資料就拿什麼。
 
-![proxy](../img/proxy.png)
+![proxy](../../../../.gitbook/assets/proxy.png)
 
 圖片中的數字代表以下流程：
 
@@ -1056,17 +1052,17 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 
 來，我們來看這張對照圖，上面是走 proxy 的流程，下面是沒有走的：
 
-![proxy2](../img/proxy2.png)
+![proxy2](../../../../.gitbook/assets/proxy2.png)
 
 我們先來看下半部的，如果不經過 proxy 的話就會有之前提過的安全性問題，網站可以去拿你 localhost 或是其他網站的資料，所以瀏覽器要把它擋住。
 
-接著來看上半部，這邊有一點很重要，那就是如果走 proxy 的話，跟 localhost:3000 溝通的是誰？是 proxy server，所以網頁去抓的並不是「本機的 localhost:3000」，而是「proxy server 的 localhost:3000」，那這樣對你的電腦來說，就沒有安全性的問題（但是對 proxy server 可能有）。(==不是一样可以获取到数据吗，不能直接打击到网站？==)
+接著來看上半部，這邊有一點很重要，那就是如果走 proxy 的話，跟 localhost:3000 溝通的是誰？是 proxy server，所以網頁去抓的並不是「本機的 localhost:3000」，而是「proxy server 的 localhost:3000」，那這樣對你的電腦來說，就沒有安全性的問題（但是對 proxy server 可能有）。\(==不是一样可以获取到数据吗，不能直接打击到网站？==\)
 
 ### 總結
 
 在這一篇裡面我們看了很多種不同的解法，你最常用的應該要是「請後端加上 CORS header」這一種，因為這通常是最正確的解法。但如果你對後端沒有掌控權，例如說你就是想要抓其他不認識的來源的資料，那大概會自己架一個 proxy server 或者是找現成的，讓 proxy 幫你加上 CORS header。
 
-現成的 server 以前有很多人會用 [CORS Anywhere](https://github.com/Rob--W/cors-anywhere)，但是從 2021 年 2 月開始，因為各種因素所以這個服務會被加上很多限制，因為它本來就不是給大家作為 proxy 服務來使用，而是作為 CORS anywhere 這個專案的 demo。詳情可以參考：[PSA: Public demo server (cors-anywhere.herokuapp.com) will be very limited by January 2021, 31st #301](https://github.com/Rob--W/cors-anywhere/issues/301)
+現成的 server 以前有很多人會用 [CORS Anywhere](https://github.com/Rob--W/cors-anywhere)，但是從 2021 年 2 月開始，因為各種因素所以這個服務會被加上很多限制，因為它本來就不是給大家作為 proxy 服務來使用，而是作為 CORS anywhere 這個專案的 demo。詳情可以參考：[PSA: Public demo server \(cors-anywhere.herokuapp.com\) will be very limited by January 2021, 31st \#301](https://github.com/Rob--W/cors-anywhere/issues/301)
 
 若是後端 API 只提供 JSONP 形式的方式，那也可以用 JSONP 來做；只是在自己電腦上想測試東西又覺得 CORS 很煩的話，裝個擴充套件來解決這問題也是可以的，但要注意的是這只有在自己電腦上有用，換一台電腦就失效了。
 
@@ -1107,7 +1103,7 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 
 而表單長這樣（雖然長得很像 Goolge 表單但是是小明自己做的）：
 
-![01-form](../img/01-form.png)
+![01-form](../../../../.gitbook/assets/01-form.png)
 
 小明花了半天不到的時間，把頁面都刻好了，功能也差不多做完了，只剩下最後一步而已。小明的主管跟他說公司常常會對外舉辦一些活動，而在活動尾聲都會提供這個表單給大家，希望大家統一透過表單留下聯絡資料。
 
@@ -1117,13 +1113,13 @@ Proxy server 的翻譯叫做代理伺服器，在不同的場合下用這個詞�
 
 小明接到這個任務之後，想說先把 API 內容抓下來看看好了，於是就寫了這樣一段程式碼：
 
-```
+```text
 fetch('http://localhost:3000')
 ```
 
 然後發現 console 出現了錯誤訊息：
 
-![02-cors-error](../img/02-cors-error.png)
+![02-cors-error](../../../../.gitbook/assets/02-cors-error.png)
 
 小明沒有看得很懂那是什麼意思，只注意到了最後一段：
 
@@ -1139,7 +1135,7 @@ fetch('http://localhost:3000', {
 
 改完之後重新整理，發現沒有錯誤了，可是印出來的 response 長得特別奇怪：
 
-![03-opaque](../img/03-opaque.png)
+![03-opaque](../../../../.gitbook/assets/03-opaque.png)
 
 沒有任何資料，而且 status 居然是 0。小明在這之後 debug 很久，找不出原因，不知道為什麼就是拿不到資料。眼看死線將近，小明鼓起勇氣去求助了前輩小華，小華跟他說：
 
@@ -1170,7 +1166,7 @@ fetch('http://localhost:3000')
 
 打開了瀏覽器，發現可以成功拿到選項了，也從 network tab 裡面看到了新增加的 header：
 
-![04-acao](../img/04-acao.png)
+![04-acao](../../../../.gitbook/assets/04-acao.png)
 
 拿到資料以後，就只剩下把選項放上去畫面而已，大概又半天的時間，小明就把這個功能做完並且測試完了，感謝小華前輩的幫助。
 
@@ -1255,13 +1251,13 @@ document.querySelector('.contact-us-form')
 
 就只是換一下資料格式而已，改成用 JSON 的方式傳資料到後端。改完之後小明再測試了一遍，發現這一次居然掛掉了，而且出現錯誤訊息：
 
-![05-preflight-error](../img/05-preflight-error.png)
+![05-preflight-error](../../../../.gitbook/assets/05-preflight-error.png)
 
-> Access to fetch at ‘http://localhost:3000/form’ from origin ‘null’ has been blocked by CORS policy: Response to preflight request doesn’t pass access control check: No ‘Access-Control-Allow-Origin’ header is present on the requested resource. If an opaque response serves your needs, set the request’s mode to ‘no-cors’ to fetch the resource with CORS disabled.
+> Access to fetch at ‘[http://localhost:3000/form’](http://localhost:3000/form’) from origin ‘null’ has been blocked by CORS policy: Response to preflight request doesn’t pass access control check: No ‘Access-Control-Allow-Origin’ header is present on the requested resource. If an opaque response serves your needs, set the request’s mode to ‘no-cors’ to fetch the resource with CORS disabled.
 
 切到 network tab 去看 request 的狀況，發現除了原本預期的 POST 以外，還多了一個 OPTIONS 的 request：
 
-![06-preflight-tab](../img/06-preflight-tab.png)
+![06-preflight-tab](../../../../.gitbook/assets/06-preflight-tab.png)
 
 小明上網用錯誤訊息給的關鍵字：`preflight request` 找了一下資料，發現 CORS 沒有他想像中的簡單。
 
@@ -1284,7 +1280,6 @@ document.querySelector('.contact-us-form')
 如果後端願意放行，就跟之前一樣，回一個 `Access-Control-Allow-Origin` 就好了。知道這點以後，小明馬上請後端同事補了一下，後端程式碼變成：
 
 ```javascript
-
 app.post('/form', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.json({
@@ -1301,7 +1296,7 @@ app.options('/form', (req, res) => {
 
 改好以後小明重新試了一下，發現居然還是有錯誤：
 
-> Access to fetch at ‘http://localhost:3000/form’ from origin ‘null’ has been blocked by CORS policy: Request header field content-type is not allowed by Access-Control-Allow-Headers in preflight response.
+> Access to fetch at ‘[http://localhost:3000/form’](http://localhost:3000/form’) from origin ‘null’ has been blocked by CORS policy: Request header field content-type is not allowed by Access-Control-Allow-Headers in preflight response.
 
 當你的 CORS request 含有自訂的 header 的時候，preflight response 需要明確用 `Access-Control-Allow-Headers` 來表明：「我願意接受這個 header」，瀏覽器才會判斷預檢通過。
 
@@ -1319,10 +1314,10 @@ app.options('/form', (req, res) => {
 
 流程會像是這樣：
 
-1. 我們要送出 POST 的 request 到 http://localhost:3000/form
+1. 我們要送出 POST 的 request 到 [http://localhost:3000/form](http://localhost:3000/form)
 2. 瀏覽器發現是非簡單請求，因此先發出一個 preflight request
 3. 檢查 response，preflight 通過
-4. 送出 POST 的 request 到 http://localhost:3000/form
+4. 送出 POST 的 request 到 [http://localhost:3000/form](http://localhost:3000/form)
 
 所以如果 preflight 沒有過，第一個步驟的 request 是不會被送出的。
 
@@ -1367,7 +1362,7 @@ app.options('/form', (req, res) => {
 
 針對第一點，你可能有發現如果一個請求是非簡單請求，那你絕對不可能用 HTML 的 form 元素做出一樣的 request，反之亦然。舉例來說，`<form>` 的 enctype 不支援 `application/json`，所以這個 content type 是非簡單請求；enctype 支援 `multipart/form`，所以這個 content type 屬於簡單請求。
 
-https://www.w3school.com.cn/tags/att_form_enctype.asp (确实不支持json)
+[https://www.w3school.com.cn/tags/att\_form\_enctype.asp](https://www.w3school.com.cn/tags/att_form_enctype.asp) \(确实不支持json\)
 
 對於那些古老的網站，甚至於是在 XMLHttpRequest 出現之前就存在的網站，他們的後端沒有預期到瀏覽器能夠發出 method 是 `DELETE` 或是 `PATCH` 的 request，也沒有預期到瀏覽器會發出 content-type 是 `application/json` 的 request，因為在那個時代 `<form>` 跟 `<img>` 等等的元素是唯一能發出 request 的方法。（==应该是指表单原始方法通过action等属性发送请求吧==）
 
@@ -1399,9 +1394,9 @@ fetch('http://localhost:3000/form', {
 
 可是沒想到前端卻出現了錯誤訊息：
 
-![07-cookie-error](../img/07-cookie-error.png)
+![07-cookie-error](../../../../.gitbook/assets/07-cookie-error.png)
 
-> Access to fetch at ‘http://localhost:3000/form’ from origin ‘[http://localhost:8080](http://localhost:8080/)’ has been blocked by CORS policy: Response to preflight request doesn’t pass access control check: The value of the ‘Access-Control-Allow-Origin’ header in the response must not be the wildcard ‘*’ when the request’s credentials mode is ‘include’.
+> Access to fetch at ‘[http://localhost:3000/form’](http://localhost:3000/form’) from origin ‘[http://localhost:8080](http://localhost:8080/)’ has been blocked by CORS policy: Response to preflight request doesn’t pass access control check: The value of the ‘Access-Control-Allow-Origin’ header in the response must not be the wildcard ‘\*’ when the request’s credentials mode is ‘include’.
 
 為什麼會這樣呢？因為如果沒有這個限制的話，那代表任何網站（任何 origin）都可以發 request 到這個 API，並且帶上使用者的 cookie，這樣就會有安全性的問題產生，大概就跟 CSRF 有異曲同工之妙。
 
@@ -1449,7 +1444,7 @@ app.options('/form', (req, res) => {
 
 還記得我們一開始串的那一個 API 嗎？跟後端拿選項的 API。雖然之前已經順利完成，但沒想到有隕石砸下來了。今天早上上面說要加一個新的需求。
 
-這個需要是要對這個==API 的內容做版本控制==，後端會在 response header 裡面多帶上一個 header：`X-List-Version`，來讓前端知道這個選項的清單是哪一個版本。(没明白有什么用，版本和数据后端都传回前端？不是应该只传版本号到前端，前端根据版本号准备显示数据吗？)
+這個需要是要對這個==API 的內容做版本控制==，後端會在 response header 裡面多帶上一個 header：`X-List-Version`，來讓前端知道這個選項的清單是哪一個版本。\(没明白有什么用，版本和数据后端都传回前端？不是应该只传版本号到前端，前端根据版本号准备显示数据吗？\)
 
 而前端則是要拿到這個版本，並且把值放到表單裡面一起送出。
 
@@ -1483,7 +1478,7 @@ fetch('http://localhost:3000')
 
 此時，神奇的事情發生了。明明從 network tab 去看，確實有我們要的 response header，但是在程式裡面卻拿不到，輸出 null。小明檢查了幾遍，確定字沒打錯，而且沒有任何錯誤訊息，但就是拿不到。
 
-![08-custom-header-error](../img/08-custom-header-error.png)
+![08-custom-header-error](../../../../.gitbook/assets/08-custom-header-error.png)
 
 卡了一個小時之後，小明決定再次求助前輩小華。小華身為資深前輩，一看到這個狀況之後就說了：
 
@@ -1519,7 +1514,7 @@ app.get('/', (req, res) => {
 
 原本以為一切都很順利的小明又再次踢到了鐵板。這次是老闆那邊提出的需求，現在一送出表單之後就沒機會再更改了，若是使用者意識到哪邊有填錯，就只能重新再填一遍。而老闆覺得這樣的體驗不好，希望在使用者送出表單以後還有一次機會能夠挽回，可以編輯剛剛送出的表單。
 
-跟後端討論過後，在送出表單之後後端會給一個 token，前端只要帶著這個 token 去打 `PATCH /form` 這個 API，就能夠編輯剛剛表單的內容。(==一般实际使用时都是根据具体的id去访问修改接口修改。这里应该是相当于返回请求的id，然后编辑这个请求的信息吧？==)
+跟後端討論過後，在送出表單之後後端會給一個 token，前端只要帶著這個 token 去打 `PATCH /form` 這個 API，就能夠編輯剛剛表單的內容。\(==一般实际使用时都是根据具体的id去访问修改接口修改。这里应该是相当于返回请求的id，然后编辑这个请求的信息吧？==\)
 
 後端長得像這樣，一樣有把該加的 header 都加好：
 
@@ -1562,7 +1557,7 @@ fetch('http://localhost:3000/form', {
 
 其實跟之前送出表單的程式碼八七分像，差別大概只在 body 跟 method 的部分。然而，小明在測試的時候，瀏覽器又跳出錯誤了：
 
-> Access to fetch at ‘http://localhost:3000/form’ from origin ‘[http://localhost:8080](http://localhost:8080/)’ has been blocked by CORS policy: Method PATCH is not allowed by Access-Control-Allow-Methods in preflight response.
+> Access to fetch at ‘[http://localhost:3000/form’](http://localhost:3000/form’) from origin ‘[http://localhost:8080](http://localhost:8080/)’ has been blocked by CORS policy: Method PATCH is not allowed by Access-Control-Allow-Methods in preflight response.
 
 ==跨來源的請求只接受三種 HTTP Method：`GET`、`HEAD` 以及 `POST`==，除了這三種之外，都必須由後端回傳一個 `Access-Control-Allow-Methods`，讓後端決定有哪些 method 可以用。
 
@@ -1623,7 +1618,7 @@ app.options('/form', (req, res) => {
 
 關於快取的部分，則是用 `Access-Control-Max-Age`。
 
-整串故事看下來，其實你會發現根本沒什麼前端的事情。前端在整個故事中擔任的角色就是：寫 code => 發現錯誤 => 回報後端 => 後端修正 => 完成功能。這也呼應了我之前一再強調的：==「CORS 的問題，通常都不是前端能解決的」==。
+整串故事看下來，其實你會發現根本沒什麼前端的事情。前端在整個故事中擔任的角色就是：寫 code =&gt; 發現錯誤 =&gt; 回報後端 =&gt; 後端修正 =&gt; 完成功能。這也呼應了我之前一再強調的：==「CORS 的問題，通常都不是前端能解決的」==。
 
 說穿了，==CORS 就是藉由一堆的 response header 來跟瀏覽器講說哪些東西是前端有權限存取的。如果沒有後端給的這些 header，那前端根本什麼也做不了==。因此無論是前端還是後端，都有必要知道這些 header，未來碰到相關問題的時候才知道怎麼解決。
 
@@ -1664,14 +1659,14 @@ app.options('/form', (req, res) => {
 > The goal is to unify fetching across the web platform and provide consistent handling of everything that involves, including:
 >
 > 目标是统一跨Web平台的提取，并提供涉及所有内容的一致处理，包括：
-
-> - URL schemes
-> - Redirects
-> - Cross-origin semantics
-> - CSP
-> - Service workers
-> - Mixed Content
-> - `Referer`
+>
+> * URL schemes
+> * Redirects
+> * Cross-origin semantics
+> * CSP
+> * Service workers
+> * Mixed Content
+> * `Referer`
 >
 > To do so it also supersedes the HTTP `Origin` header semantics originally defined in The Web Origin Concept
 >
@@ -1687,15 +1682,15 @@ app.options('/form', (req, res) => {
 
 fetch 看起來很簡單，不過就是發個 request 然後接收 response 而已，但實際上其實水很深，以前沒有規格記錄下來導致每個 API 的實作都不一樣，這也是為什麼會有這個統一的 spec 誕生。
 
-> Numerous APIs provide the ability to fetch a resource, e.g. HTML’s img and script element, CSS’ cursor and list-style-image, the navigator.sendBeacon() and self.importScripts() JavaScript APIs. The Fetch Standard provides a unified architecture for these features so they are all consistent when it comes to various aspects of fetching, such as redirects and the CORS protocol.
+> Numerous APIs provide the ability to fetch a resource, e.g. HTML’s img and script element, CSS’ cursor and list-style-image, the navigator.sendBeacon\(\) and self.importScripts\(\) JavaScript APIs. The Fetch Standard provides a unified architecture for these features so they are all consistent when it comes to various aspects of fetching, such as redirects and the CORS protocol.
 >
-> 许多api都提供了获取资源的能力，例如HTML的img和script元素，CSS游标和list-style-image, navigator.sendBeacon()和self.importScripts() JavaScript api。Fetch标准为这些特性提供了统一的架构，因此当涉及到获取的各个方面时，比如重定向和CORS协议，它们都是一致的。
+> 许多api都提供了获取资源的能力，例如HTML的img和script元素，CSS游标和list-style-image, navigator.sendBeacon\(\)和self.importScripts\(\) JavaScript api。Fetch标准为这些特性提供了统一的架构，因此当涉及到获取的各个方面时，比如重定向和CORS协议，它们都是一致的。
 
 這邊提到了我在前面所說的，抓取資料或是跨來源抓取資源並不只侷限在 AJAX 上面，載入圖片或是 CSS 也是抓取資源的一種，而這份規格就是為了統一管理這些行為。
 
-> The Fetch Standard also defines the fetch() JavaScript API, which exposes most of the networking functionality at a fairly low level of abstraction.
+> The Fetch Standard also defines the fetch\(\) JavaScript API, which exposes most of the networking functionality at a fairly low level of abstraction.
 >
-> Fetch标准还定义了Fetch () JavaScript API，它在相当低的抽象级别上公开了大多数网络功能。
+> Fetch标准还定义了Fetch \(\) JavaScript API，它在相当低的抽象级别上公开了大多数网络功能。
 
 身為 Fetch 規格，定義 JS 中的 `fetch()` API 也是相當合情合理的事情。
 
@@ -1707,7 +1702,7 @@ fetch 看起來很簡單，不過就是發個 request 然後接收 response 而�
 
 Origin 的部分在 3.1. `Origin` header，裡面有附上 ABNF，用特定格式寫成的規則：
 
-```
+```text
 Origin                           = origin-or-null
 
 origin-or-null                   = origin / %s"null" ; case-sensitive
@@ -1718,7 +1713,7 @@ origin                           = scheme "://" host [ ":" port ]
 
 這邊值得注意的是與舊的 rfc6454 的區別，在舊的規範中 origin 其實可以是一個 list 的：
 
-```
+```text
 7.1.  Syntax
 
    The Origin header field has the following syntax:
@@ -1728,7 +1723,7 @@ origin                           = scheme "://" host [ ":" port ]
    origin-list         = serialized-origin *( SP serialized-origin )
    serialized-origin   = scheme "://" host [ ":" port ]
                        ; <scheme>, <host>, <port> from RFC
-                       
+
 7.2 Semantics
 
    In some cases, a number of origins contribute to causing the user
@@ -1750,11 +1745,11 @@ CORS 的部分在 3.2. CORS protocol 的地方。開頭的介紹非常重要。
 
 CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可以抓取跨來源資源的方法。然後這個 procotol 是建立在 HTTP 之上的。
 
-> It needs to be an opt-in mechanism to prevent leaking data from responses behind a firewall (intranets). Additionally, for requests including credentials it needs to be opt-in to prevent leaking potentially-sensitive data.
+> It needs to be an opt-in mechanism to prevent leaking data from responses behind a firewall \(intranets\). Additionally, for requests including credentials it needs to be opt-in to prevent leaking potentially-sensitive data.
 >
-> 它需要是一种可选择的机制，以防止来自防火墙(内部网)后响应的数据泄漏。此外，对于包括凭据的请求，需要选择加入，以防止泄漏潜在的敏感数据。
+> 它需要是一种可选择的机制，以防止来自防火墙\(内部网\)后响应的数据泄漏。此外，对于包括凭据的请求，需要选择加入，以防止泄漏潜在的敏感数据。
 
-這邊提到了「prevent leaking data from responses behind a firewall (intranets)」，其實就是我第一篇文章中所提到的案例。如果沒有 same-origin policy 的保護，在內網的資訊可能就會被輕易取得。
+這邊提到了「prevent leaking data from responses behind a firewall \(intranets\)」，其實就是我第一篇文章中所提到的案例。如果沒有 same-origin policy 的保護，在內網的資訊可能就會被輕易取得。
 
 而「for requests including credentials it needs to be opt-in」也是我們之前所提到的，如果 request 有包含 credentials（通常是 cookie），就必須 opt-in，否則也會有資訊洩漏的風險。
 
@@ -1763,7 +1758,7 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 > The CORS protocol consists of a set of headers that indicates whether a response can be shared cross-origin.
 >
 > CORS协议由一组头组成，这些头指示响应是否可以跨源共享。
-
+>
 > For requests that are more involved than what is possible with HTML’s form element, a CORS-preflight request is performed, to ensure request’s current URL supports the CORS protocol.
 >
 > 对于比HTML表单元素更复杂的请求，执行一个CORS-preflight请求，以确保请求的当前URL支持CORS协议。
@@ -1786,7 +1781,7 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 
 為了驗證這個行為，我建立了一個簡單的表單：
 
-```
+```text
 <form action="/test" method="POST">
   <input name="a" />
   <input type="submit" />
@@ -1797,11 +1792,9 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 
 > A CORS-preflight request is a CORS request that checks to see if the CORS protocol is understood. It uses `OPTIONS` as method and includes these headers:
 >
-> `Access-Control-Request-Method`
-> Indicates which method a future CORS request to the same resource might use.
+> `Access-Control-Request-Method` Indicates which method a future CORS request to the same resource might use.
 >
-> `Access-Control-Request-Headers`
-> Indicates which headers a future CORS request to the same resource might use.
+> `Access-Control-Request-Headers` Indicates which headers a future CORS request to the same resource might use.
 
 而 CORS-preflight request 就是利用 ==OPTIONS== 來確認 server 是不是理解 CORS procotol。
 
@@ -1824,15 +1817,13 @@ CORS protocol 存在是為了讓網頁可以有除了 form 元素以外，也可
 >
 > An HTTP response to a CORS request can include the following headers:
 >
-> `Access-Control-Allow-Origin`
-> Indicates whether the response can be shared, via returning the literal value of the `Origin` request header (which can be `null`) or `*` in a response.
+> `Access-Control-Allow-Origin` Indicates whether the response can be shared, via returning the literal value of the `Origin` request header \(which can be `null`\) or `*` in a response.
 >
-> `Access-Control-Allow-Credentials`
-> Indicates whether the response can be shared when request’s credentials mode is “include”.
+> `Access-Control-Allow-Credentials` Indicates whether the response can be shared when request’s credentials mode is “include”.
 
 這兩個是針對 CORS request 可以返回的 response header，已經在上一篇文章裡面提到過了。前者用來決定==哪些 origin 合法==，後者決定是不是允許==帶上 cookie 以及設置 cookie==。
 
-```
+```text
 An HTTP response to a CORS-preflight request can include the following headers:
 
 Access-Control-Allow-Methods
@@ -1855,7 +1846,7 @@ CORS-preflight request 也是 CORS request 的一種，所以上面所說的針�
 
 這邊值得注意的是第三個，預設值是 5 秒，所以 5 秒內針對同一個資源的 CORS response header 是可以重用的。
 
-```
+```text
 An HTTP response to a CORS request that is not a CORS-preflight request can also include the following header:
 
 Access-Control-Expose-Headers
@@ -1872,8 +1863,7 @@ Indicates which headers can be exposed as part of the response by listing their 
 
 在 4.1. Main fetch 的章節中有詳細敘述了抓取資源的規則，其中我們關注的是第 5 點中的：
 
-> request’s use-CORS-preflight flag is set
-> request’s unsafe-request flag is set and either request’s method is not a CORS-safelisted method or CORS-unsafe request-header names with request’s header list is not empty
+> request’s use-CORS-preflight flag is set request’s unsafe-request flag is set and either request’s method is not a CORS-safelisted method or CORS-unsafe request-header names with request’s header list is not empty
 >
 > 设置request的use-CORS-preflight标志，并且request的方法不是一个CORS-safelisted方法，或者请求头列表不为空的CORS-unsafe请求头名称
 >
@@ -1932,11 +1922,11 @@ Indicates which headers can be exposed as part of the response by listing their 
 
 這邊可以看到 4.10. CORS check：
 
-![cors-check](../img/cors-check.png)
+![cors-check](../../../../.gitbook/assets/cors-check.png)
 
 如果 `Access-Control-Allow-Origin` 裡的 origin 是 null 的話，就失敗（這邊特地強調是 null 而不是 “null”，這我們之後會再提到）。
 
-再來檢查如果 origin 是 * 而且 credentials mode 不是 include，就給過。
+再來檢查如果 origin 是 \* 而且 credentials mode 不是 include，就給過。
 
 接著比對 request 的 origin 跟 header 裡的，不同的話就回傳失敗。
 
@@ -1958,13 +1948,13 @@ Indicates which headers can be exposed as part of the response by listing their 
 
 在第 30 步的地方可以看到：
 
-![fetch-01](../img/fetch-01.png)
+![fetch-01](../../../../.gitbook/assets/fetch-01.png)
 
 如果 request 的 method 不是 GET、HEAD 或是 POST 的話，就丟一個 TypeError 出來。除此之外，也會把 `header's guard` 設成 `request-no-cors`。
 
 上面這只是新建一個 request 而已，接著可以看 `5.6. Fetch method` 來看實際送出 request 的流程：
 
-![fetch-02](../img/fetch-02.png)
+![fetch-02](../../../../.gitbook/assets/fetch-02.png)
 
 前面都只是在設定一些參數，真正做動作的是第十步：
 
@@ -1972,15 +1962,15 @@ Indicates which headers can be exposed as part of the response by listing their 
 
 那個「Fetch」是個超連結，點下去可以連到 `4. Fetching` 的章節，而這邊我們關注的是最後一步：
 
-![fetch-03](../img/fetch-03.png)
+![fetch-03](../../../../.gitbook/assets/fetch-03.png)
 
-​	
+​
 
 > 1. Run main fetch given fetchParams.
 
 main fetch 也是一個超連結，點了會跳到 `4.1. Main fetch` 去，這邊有一整段專門在處理 mode 是 no-cors 時的狀況：
 
-![fetch-04](../img/fetch-04.png)
+![fetch-04](../../../../.gitbook/assets/fetch-04.png)
 
 這邊有幾個值得注意的地方：
 
@@ -1993,13 +1983,13 @@ main fetch 也是一個超連結，點了會跳到 `4.1. Main fetch` 去，這�
 
 而 warning 的部分其實滿重要的：
 
-> This is only an effective defense against side channel attacks if noCorsResponse is kept isolated from the process that initiated the request.	
+> This is only an effective defense against side channel attacks if noCorsResponse is kept isolated from the process that initiated the request.
 
 ==這邊之所以會新建一個 response，是因為不想回傳原本的 response，要讓原本的 response 跟發起這個 request 的 process 分開==。為什麼要這樣做呢？這我們下一篇會提到。
 
 再來我們繼續往下看，可以看到第十四步：
 
-![fetch-05](../img/fetch-05.png)
+![fetch-05](../../../../.gitbook/assets/fetch-05.png)
 
 之前已經把 response tainting 設成 opaque，所以根據第二點，會把 response 設成 [opaque filtered response](https://fetch.spec.whatwg.org/#concept-filtered-response-opaque)。
 
@@ -2045,7 +2035,7 @@ main fetch 也是一個超連結，點了會跳到 `4.1. Main fetch` 去，這�
 
 ## 五，跨來源的安全性問題
 
-###  前言
+### 前言
 
 在前面幾篇裡面，我們知道 CORS protocol 基本上就是為了安全性所產生的協定，而除了 CORS 以外，其實還有一系列跟跨來源有關的東西，例如說：
 
@@ -2077,7 +2067,7 @@ app.use((req, res, next) => {
 })
 ```
 
-為了方便起見，所以直接映射 request header 裡面的 origin。這樣做的話，其實就代表任何一個 origin 都能夠通過 CORS 檢查。(==这和直接设置*有什么区别呢？？？==)
+為了方便起見，所以直接映射 request header 裡面的 origin。這樣做的話，其實就代表任何一個 origin 都能夠通過 CORS 檢查。\(==这和直接设置\*有什么区别呢？？？==\)
 
 這樣做會有什麼問題呢？
 
@@ -2107,12 +2097,10 @@ fetch('http://api.example.com/me', {
 這個攻擊有幾件事情要注意：
 
 1. 這不是 XSS，因為我沒有在 `example.com` 執行程式碼，我是在我自己的釣魚網站 `http://fake-example.com` 上執行
-
 2. 這有點像是 CSRF，但是網站通常對於 GET 的 API 並不會加上 CSRF token 的防護，所以可以過關
-
 3. 如果有設定 SameSite cookie，攻擊就會失效，因為 cookie 會帶不上去
 
-   http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html
+   [http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html](http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html)
 
 因此這個攻擊要成立有幾個前提：
 
@@ -2166,13 +2154,13 @@ app.use((req, res, next) => {
 
 想知道更多的話可以參考：
 
-1. [3 Ways to Exploit Misconfigured Cross-Origin Resource Sharing (CORS)](https://we45.com/blog/3-ways-to-exploit-misconfigured-cross-origin-resource-sharing-cors/)
+1. [3 Ways to Exploit Misconfigured Cross-Origin Resource Sharing \(CORS\)](https://we45.com/blog/3-ways-to-exploit-misconfigured-cross-origin-resource-sharing-cors/)
 2. [JetBrains IDE Remote Code Execution and Local File Disclosure](http://blog.saynotolinux.com/blog/2016/08/15/jetbrains-ide-remote-code-execution-and-local-file-disclosure-vulnerability-analysis/)
 3. [AppSec EU 2017 Exploiting CORS Misconfigurations For Bitcoins And Bounties by James Kettle](https://www.youtube.com/watch?v=wgkj4ZgxI4c&ab_channel=OWASP)
 
-### 繞過 Same-origin Policy？(针对window)
+### 繞過 Same-origin Policy？\(针对window\)
 
-除了 CORS 以外，Same-origin policy 其實出現在瀏覽器的各個地方，例如說 `window.open` 以及 `iframe`。當你使用 `window.open` 打開一個網頁的時候，回傳值會是那個新的網頁的 window（更精確來說是 WindowProxy 啦，可以參考 [MDN: Window.open()](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)），但只有在 same origin 的狀況下才能存取，如果不是 same origin 的話，只能存取很小一部分的東西。
+除了 CORS 以外，Same-origin policy 其實出現在瀏覽器的各個地方，例如說 `window.open` 以及 `iframe`。當你使用 `window.open` 打開一個網頁的時候，回傳值會是那個新的網頁的 window（更精確來說是 WindowProxy 啦，可以參考 [MDN: Window.open\(\)](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)），但只有在 same origin 的狀況下才能存取，如果不是 same origin 的話，只能存取很小一部分的東西。
 
 假設我現在在 `a.example.com` 好了，然後寫了這一段 script：
 
@@ -2188,7 +2176,7 @@ setTimeout(() => {
 
 執行之後會看到 console 有一段錯誤：
 
-![frame-block](../img/frame-block.png)
+![frame-block](../../../../.gitbook/assets/frame-block.png)
 
 因為 `a.example.com` 跟 `b.example.com` 是 cross origin，所以沒辦法存取到 window。這個規範其實也十分合理，因為如果能存取到 window 的話其實可以做滿多事情的，所以限制在 same origin 底下才能拿到 window。
 
@@ -2254,9 +2242,9 @@ window.secret = 12345
 
 在 2018 年 1 月 3 號，Google 的 Project Zeror 對外發布了一篇名為：[Reading privileged memory with a side-channel](https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html) 的文章，裡面講述了三種針對 CPU data cache 的攻擊：
 
-- Variant 1: bounds check bypass (CVE-2017-5753)
-- Variant 2: branch target injection (CVE-2017-5715)
-- Variant 3: rogue data cache load (CVE-2017-5754)
+* Variant 1: bounds check bypass \(CVE-2017-5753\)
+* Variant 2: branch target injection \(CVE-2017-5715\)
+* Variant 3: rogue data cache load \(CVE-2017-5754\)
 
 而前兩種又被稱為 Spectre，第三種被稱為是 Meltdown。如果你有印象的話，在當時這可是一件大事，因為問題是出在==CPU==，而且並不是個容易修復的問題。
 
@@ -2285,19 +2273,19 @@ size_t x = 1;
 run(x);
 ```
 
-我宣告了兩個陣列，型態是 uint8_t，所以每個陣列的元素大小都會是 1 個 byte（8 bit）。而 arr1 的長度是 16，arr2 的長度是 256。
+我宣告了兩個陣列，型態是 uint8\_t，所以每個陣列的元素大小都會是 1 個 byte（8 bit）。而 arr1 的長度是 16，arr2 的長度是 256。
 
-接下來我有一個 function 叫做 run，會传一個數字 x，然後判斷 x 是不是比 array1_size 小，是的話我就先把 `array1[x]` 的值取出來，然後作為索引去存取 `array2`，再把拿到的值給 y。
+接下來我有一個 function 叫做 run，會传一個數字 x，然後判斷 x 是不是比 array1\_size 小，是的話我就先把 `array1[x]` 的值取出來，然後作為索引去存取 `array2`，再把拿到的值給 y。
 
 以上面的例子來說，`run(1)` 的話，就會執行：
 
-```
+```text
 uint8_t y = array2[array1[1]];
 ```
 
 而 `array1[1]` 的值是 2，所以就是 `y = array2[2]`。
 
-這段程式碼看起來沒什麼問題，而且我有做了陣列長度的判斷，所以不會有超出陣列索引（Out-of-Bounds，簡稱 OOB）的狀況發生，只有在 x 比 array1_size 小的時候才會繼續往下執行。
+這段程式碼看起來沒什麼問題，而且我有做了陣列長度的判斷，所以不會有超出陣列索引（Out-of-Bounds，簡稱 OOB）的狀況發生，只有在 x 比 array1\_size 小的時候才會繼續往下執行。
 
 不過這只是你看起來而已。
 
@@ -2342,7 +2330,7 @@ run(x);
 uint8_t y = array2[array1[100]];
 ```
 
-假設 array1[100] 的值是 38 好了，那就是 `y = array2[38]`，所以 `array2[38]` 會被放到 CPU cache 裡面，增進之後載入的效率。
+假設 array1\[100\] 的值是 38 好了，那就是 `y = array2[38]`，所以 `array2[38]` 會被放到 CPU cache 裡面，增進之後載入的效率。
 
 接著實際執行到 if condition 發現條件不符合，所以把剛剛拿到的結果丟掉，什麼事都沒發生，function 執行完畢。
 
@@ -2350,7 +2338,7 @@ uint8_t y = array2[array1[100]];
 
 這時候我們就知道了一件事：
 
-> array1[100] 的內容是 38
+> array1\[100\] 的內容是 38
 
 你可能會問說：「那你知道這能幹嘛？」，能做的事情可多了。array1 的長度只有 16，所以我讀取到的值並不是 array1 本身的東西，==而是其他部分的記憶體，是我不應該存取到的地方。而我只要一直複製這個模式，就能把其他地方的資料全都讀出來==。
 
@@ -2365,7 +2353,7 @@ uint8_t y = array2[array1[100]];
 1. [Reading privileged memory with a side-channel](https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html)
 2. [解读 Meltdown & Spectre CPU 漏洞](https://zhuanlan.zhihu.com/p/32757727)
 3. [浅谈处理器级Spectre Attack及Poc分析](https://yangrz.github.io/blog/2018/01/09/cpu/)
-4. [[閒聊\] Spectre & Meltdown漏洞概論(翻譯)](https://www.ptt.cc/bbs/NetSecurity/M.1515146856.A.750.html)
+4. [\[閒聊\] Spectre & Meltdown漏洞概論\(翻譯\)](https://www.ptt.cc/bbs/NetSecurity/M.1515146856.A.750.html)
 5. [Spectre漏洞示例代码注释](https://github.com/hdzitao/spectre-attack-zh)
 6. [Google update: Meltdown/Spectre](https://developers.google.com/web/updates/2018/02/meltdown-spectre)
 7. [Mitigating Spectre with Site Isolation in Chrome](https://security.googleblog.com/2018/07/mitigating-spectre-with-site-isolation.html)
@@ -2406,22 +2394,22 @@ Google 於 Spectre 攻擊公開的一個月後，也就是 2018 年 2 月，在�
 
 （==这里说的是普通网络请求吧，不是标签载入吧。可能还是标签载入，标签载入也会走一般的网络请求==）
 
-![corb](../img/corb.png)
+![corb](../../../../.gitbook/assets/corb.png)
 
 ==總結一下，CORB 是個已經預設在 Chrome 裡的機制，會自動阻擋不合理的跨來源資源載入，像是用 `<img>` 來載入 json 或是用 `<script>` 載入 HTML 等等。而除了 Chrome 之外，Safari 跟 Firefox 好像都還沒實裝這個機制。==
 
 更詳細的解釋可以參考：
 
 1. [Cross-Origin Read Blocking for Web Developers](https://www.chromium.org/Home/chromium-security/corb-for-developers)
-2. [Cross-Origin Read Blocking (CORB)](https://chromium.googlesource.com/chromium/src/+/master/services/network/cross_origin_read_blocking_explainer.md)
+2. [Cross-Origin Read Blocking \(CORB\)](https://chromium.googlesource.com/chromium/src/+/master/services/network/cross_origin_read_blocking_explainer.md)
 
 ### CORP（Cross-Origin Resource Policy）
 
 ==CORB 是瀏覽器內建的機制，自動保護了 HTML、XML 與 JSON==，不讓他們被載入到跨來源的 render process 裡面，就不會被 Spectre 攻擊。但是其他資源呢？如果其他類型的資源，例如說有些照片跟影片可能也是機密資料，我可以保護他們嗎？
 
-這就是 CORP 這個 HTTP response header 的功能。CORP 的前身叫做 From-Origin，下面引用一段來自 [Cross-Origin-Resource-Policy (was: From-Origin) #687](https://github.com/whatwg/fetch/issues/687) 的敘述：
+這就是 CORP 這個 HTTP response header 的功能。CORP 的前身叫做 From-Origin，下面引用一段來自 [Cross-Origin-Resource-Policy \(was: From-Origin\) \#687](https://github.com/whatwg/fetch/issues/687) 的敘述：
 
-> Cross-Origin Read Blocking (CORB) automatically protects against Spectre attacks that load cross-origin, cross-type HTML, XML, and JSON resources, and is based on the browser’s ability to distinguish resource types. We think CORB is a good idea. From-Origin would offer servers an opt-in protection beyond CORB.
+> Cross-Origin Read Blocking \(CORB\) automatically protects against Spectre attacks that load cross-origin, cross-type HTML, XML, and JSON resources, and is based on the browser’s ability to distinguish resource types. We think CORB is a good idea. From-Origin would offer servers an opt-in protection beyond CORB.
 
 如果你自己知道該保護哪些資源，那就可以用 CORP 這個 header，指定這些資源只能被哪些來源載入。CORP 的內容有三種：
 
@@ -2443,13 +2431,13 @@ app.use(express.static('public'));
 
 接著在 `http://a.example.com` 引入這張圖片：
 
-```html
+```markup
 <img src="http://b.example.com/logo.jpg" />
 ```
 
 重新整理打開 console，就會看到圖片無法載入的錯誤訊息，打開 network tab 還會跟你詳細解釋原因：
 
-![corp-fail](../img/corp-fail.png)
+![corp-fail](../../../../.gitbook/assets/corp-fail.png)
 
 如果把 header 改成 `same-site` 或是 `cross-origin`，就可以看到圖片正確被載入。
 
@@ -2461,11 +2449,11 @@ app.use(express.static('public'));
 
 > The Web platform has no limitations on embedding resources from different origins currently. E.g. an HTML document on [http://example.org](http://example.org/) can embed an image from [http://corp.invalid](http://corp.invalid/) without issue. This has led to a number of problems:
 >
-> Web平台目前在嵌入来自不同来源的资源方面没有任何限制。 例如。 http://example.org上的HTML文档可以嵌入来自http://corp.invalid的图像，而不会出现问题。 这导致了许多问题：
+> Web平台目前在嵌入来自不同来源的资源方面没有任何限制。 例如。 [http://example.org上的HTML文档可以嵌入来自http://corp.invalid的图像，而不会出现问题。](http://example.org上的HTML文档可以嵌入来自http://corp.invalid的图像，而不会出现问题。) 这导致了许多问题：
 
 對於這種 embedded resource，基本上 Web 沒有任何限制，想載入什麼就載入什麼，雖然方便但也會造成一些問題，像是：
 
-> Inline linking — the practice of embedding resources (e.g. images or fonts) from another server, causing the owner of that server to get a higher hosting bill.
+> Inline linking — the practice of embedding resources \(e.g. images or fonts\) from another server, causing the owner of that server to get a higher hosting bill.
 >
 > 内联链接-嵌入来自另一台服务器的资源（例如图像或字体）的做法，导致该服务器（另一台服务器）的所有者要付出更高的托管费用。
 >
@@ -2475,13 +2463,13 @@ app.use(express.static('public'));
 
 例如說在我的部落格直接連到別人家的圖片，這樣流量就是別人家 server 的，帳單也是他要付。除此之外也會有 Clickjacking 的問題。
 
-> Privacy leakage — sometimes resource availability depends on whether a visitor is signed in to a particular website. E.g. only with a I’m-signed-in-cookie will an image be returned, and if there is no such cookie an HTML document. An HTML document embedding such a resource (requested with the user’s credentials) can figure out the existence of that resource and thus whether the visitor is signed in and therefore has an account with a particular service.
+> Privacy leakage — sometimes resource availability depends on whether a visitor is signed in to a particular website. E.g. only with a I’m-signed-in-cookie will an image be returned, and if there is no such cookie an HTML document. An HTML document embedding such a resource \(requested with the user’s credentials\) can figure out the existence of that resource and thus whether the visitor is signed in and therefore has an account with a particular service.
 >
 > 隐私泄露-有时资源的可用性取决于访问者是否登录到特定网站。 例如。 仅使用“我已登录Cookie”，才会返回图片，如果没有此类Cookie，则返回HTML文档。 嵌入此类资源（要求用户提供凭据）的HTML文档可以确定该资源的存在，从而确定访问者是否已登录并因此拥有特定服务的帐户。
 
 這個我之前有看過一個網站但找不到連結了，他可以得知你在某些網站是不是登入狀態。那他怎麼知道的呢？因為有些資源可能只有在你登入的時候有權限存取。假設某個圖片網址只有登入狀態下會正確回傳圖片，沒登入的話就會回傳 server error，那我只要這樣寫就好：
 
-```html
+```markup
 <img src=xxx onerror="alert('not login')" onload="alert('login')">
 ```
 
@@ -2555,11 +2543,11 @@ COEP（Cross-Origin-Embedder-Policy）這個 header 有兩個值：
 1. unsafe-none
 2. require-corp
 
-第一個是預設值，就是沒有任何限制，第二個則是跟我們前面提到的 CORP(Cross-Origin-Resource-Policy) 有關，如果用了這個 require-corp 的話，就代表告訴瀏覽器說：「頁面上所有我載入的資源，都必須有 CORP 這個 header 的存在（或是 CORS），而且是合法的」
+第一個是預設值，就是沒有任何限制，第二個則是跟我們前面提到的 CORP\(Cross-Origin-Resource-Policy\) 有關，如果用了這個 require-corp 的話，就代表告訴瀏覽器說：「頁面上所有我載入的資源，都必須有 CORP 這個 header 的存在（或是 CORS），而且是合法的」
 
 現在假設我們有個網站 `a.example.com`，我們想讓它變成 cross-rogin isolated state，因此幫他加上一個 header：`Cross-Origin-Embedder-Policy: require-corp`，然後網頁裡面引入一個資源：
 
-```
+```text
 <img src="http://b.example.com/logo.jpg">
 ```
 
@@ -2588,16 +2576,16 @@ app.use((req, res, next) => {
 
 第一個就是預設值，不解釋，因為沒什麼作用。
 
-第二個最嚴格，如果你設定成 `same-origin` 的話，那「被你開啟的 window」也要有這個 header，而且也要設定成 `same-origin`，你們之間才能共享 window。(不共享wondow会是什么样的呢，报错？？？)
+第二個最嚴格，如果你設定成 `same-origin` 的話，那「被你開啟的 window」也要有這個 header，而且也要設定成 `same-origin`，你們之間才能共享 window。\(不共享wondow会是什么样的呢，报错？？？\)
 
 底下我們來做個實驗，我們有兩個網頁：
 
-1. http://localhost:5566/page1.html
-2. http://localhost:5566/page2.html
+1. [http://localhost:5566/page1.html](http://localhost:5566/page1.html)
+2. [http://localhost:5566/page2.html](http://localhost:5566/page2.html)
 
 page1.html 的內容如下：
 
-```	javascript
+```javascript
 <script>
   var win = window.open('http://localhost:5566/page2.html')
   setTimeout(() => {
@@ -2711,7 +2699,7 @@ app.use((req, res, next) => {
 
 總之呢，要「有機會互相存取 window」，一定要先是 ==same origin==，這點是不會變的。實際上是不是存取的到，就要看有沒有設定 COOP header 以及 header 的值。而如果有設定 COOP header 但不符合規則，那 `window.opener` 會直接變成 null，你連 location 都拿不到（沒設定規則的話，就算是 cross origin 也拿得到）。
 
- 其實根據 [spec](https://html.spec.whatwg.org/multipage/origin.html#cross-origin-opener-policies) 還有第四種：same-origin-plus-COEP，但看起來更複雜就先不研究了。
+其實根據 [spec](https://html.spec.whatwg.org/multipage/origin.html#cross-origin-opener-policies) 還有第四種：same-origin-plus-COEP，但看起來更複雜就先不研究了。
 
 ### 再回到 cross-origin isolated state
 
@@ -2724,7 +2712,7 @@ app.use((req, res, next) => {
 
 在網站上可以用：
 
-```
+```text
 self.crossOriginIsolated
 ```
 
@@ -2737,8 +2725,8 @@ self.crossOriginIsolated
 1. [Making your website “cross-origin isolated” using COOP and COEP](https://web.dev/coop-coep/)
 2. [Why you need “cross-origin isolated” for powerful features](https://web.dev/why-coop-coep/)
 3. [COEP COOP CORP CORS CORB - CRAP that’s a lot of new stuff!](https://scotthelme.co.uk/coop-and-coep/)
-4. [Making postMessage() work for SharedArrayBuffer (Cross-Origin-Embedder-Policy) #4175](https://github.com/whatwg/html/issues/4175)
-5. [Restricting cross-origin WindowProxy access (Cross-Origin-Opener-Policy) #3740](https://github.com/whatwg/html/issues/3740)
+4. [Making postMessage\(\) work for SharedArrayBuffer \(Cross-Origin-Embedder-Policy\) \#4175](https://github.com/whatwg/html/issues/4175)
+5. [Restricting cross-origin WindowProxy access \(Cross-Origin-Opener-Policy\) \#3740](https://github.com/whatwg/html/issues/3740)
 6. [Feature: Cross-Origin Resource Policy](https://www.chromestatus.com/feature/4647328103268352)
 
 ### 總結
@@ -2756,7 +2744,7 @@ self.crossOriginIsolated
 
 1. CORB：瀏覽器預設的機制，主要是防止載入不合理的資源，像是用 img 載入 HTML
 2. CORP：是一個 HTTP response header，決定這個資源可以被誰載入，可以防止 cross-origin 載入圖片、影片或任何資源
-3. COEP：是一個 HTTP response header，確保頁面上所有的資源都是合法載入的 (==不懂不懂不懂==)
+3. COEP：是一個 HTTP response header，確保頁面上所有的資源都是合法載入的 \(==不懂不懂不懂==\)
 4. COOP：是一個 HTTP response header，幫 same-origin 加上更嚴格的 window 共享設定
 
 相對於其他幾篇，我對這篇的內容沒有這麼熟悉，如果有哪邊有講錯麻煩不吝指教，感謝。
@@ -2771,12 +2759,12 @@ self.crossOriginIsolated
 
 如果你還沒看這系列文的話，傳送門如下：
 
-- [CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？](https://blog.huli.tw/2021/02/19/cors-guide-1)
-- [CORS 完全手冊（二）：如何解決 CORS 問題？](https://blog.huli.tw/2021/02/19/cors-guide-2)
-- [CORS 完全手冊（三）：CORS 詳解](https://blog.huli.tw/2021/02/19/cors-guide-3)
-- [CORS 完全手冊（四）：一起看規範](https://blog.huli.tw/2021/02/19/cors-guide-4)
-- [CORS 完全手冊（五）：跨來源的安全性問題](https://blog.huli.tw/2021/02/19/cors-guide-5)
-- [CORS 完全手冊（六）：總結、後記與遺珠](https://blog.huli.tw/2021/02/19/cors-guide-6)
+* [CORS 完全手冊（一）：為什麼會發生 CORS 錯誤？](https://blog.huli.tw/2021/02/19/cors-guide-1)
+* [CORS 完全手冊（二）：如何解決 CORS 問題？](https://blog.huli.tw/2021/02/19/cors-guide-2)
+* [CORS 完全手冊（三）：CORS 詳解](https://blog.huli.tw/2021/02/19/cors-guide-3)
+* [CORS 完全手冊（四）：一起看規範](https://blog.huli.tw/2021/02/19/cors-guide-4)
+* [CORS 完全手冊（五）：跨來源的安全性問題](https://blog.huli.tw/2021/02/19/cors-guide-5)
+* [CORS 完全手冊（六）：總結、後記與遺珠](https://blog.huli.tw/2021/02/19/cors-guide-6)
 
 ### 起源
 
@@ -2806,7 +2794,7 @@ CORS 最常見的錯誤大概就那些，包括：
 4. CSP
 5. SameSite cookie
 
-http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html
+[http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html](http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html)
 
 在找資料的過程中可以看到不少重疊的地方，尤其是 SameSite cookie，越想越覺得這東西真的很重要，而且可以防止滿多的攻擊。對了，在寫這篇文的時候參考資料其實大多都來自於 Google Chrome，所以文中有許多使用「瀏覽器」的地方，有可能現在其實只有 Chrome 有實作而已，其他瀏覽器還沒跟進。
 
@@ -2824,7 +2812,7 @@ http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html
 
 有些 CORS 問題，不一定是因為 response header 沒設好，有可能是因為之前沒設定好的 response 被 cache 住，或者甚至是憑證問題！可以參考：
 
-1. [CORS request blocked in Firefox but not other browsers #2803](https://github.com/aws-amplify/amplify-js/issues/2803)
+1. [CORS request blocked in Firefox but not other browsers \#2803](https://github.com/aws-amplify/amplify-js/issues/2803)
 2. [Firefox ‘Cross-Origin Request Blocked’ despite headers](https://stackoverflow.com/questions/24371734/firefox-cross-origin-request-blocked-despite-headers)
 3. [CORS request did not succeed on Firefox but works on Chrome](https://stackoverflow.com/questions/51831652/cors-request-did-not-succeed-on-firefox-but-works-on-chrome)
 
@@ -2834,7 +2822,7 @@ http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html
 
 可是網站對於 CORS 的規則大部分都是一致的，==那為什麼不先寫好一個設定檔讓瀏覽器來讀呢？這樣瀏覽器就會知道某個來源是不是被允許的，就不需要一直發送 preflight request 了==。
 
-這個想法的源頭來自：[RFC: a mechanism to bypass CORS preflight #210](https://github.com/whatwg/fetch/issues/210)，有空的話可以看一下裡面的討論。
+這個想法的源頭來自：[RFC: a mechanism to bypass CORS preflight \#210](https://github.com/whatwg/fetch/issues/210)，有空的話可以看一下裡面的討論。
 
 而其實不只 CORS，其他 header 也可能有類似的狀況，例如說 CSP，大部分狀況下整個網站的 CSP 其實都是一樣的，可是現在卻是每一個 HTTP response 都要回傳一樣的 CSP header，這也可以透過寫一個設定檔的方式來讓瀏覽器讀取，就不需要再個別傳了。
 
@@ -2848,7 +2836,7 @@ http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html
 
 只要這樣就可以了：
 
-```html
+```markup
 <img src=xxx crossorigin>
 ```
 
@@ -2876,7 +2864,7 @@ http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html
 
 在 [rfc6454](https://tools.ietf.org/html/rfc6454#section-5) 給出了答案：
 
-> NOTE: A URI is not necessarily same-origin with itself. For example, a data URI [RFC2397] is not same-origin with itself because data URIs do not use a server-based naming authority and therefore have globally unique identifiers as origins.
+> NOTE: A URI is not necessarily same-origin with itself. For example, a data URI \[RFC2397\] is not same-origin with itself because data URIs do not use a server-based naming authority and therefore have globally unique identifiers as origins.
 
 data URI 跟自己不同源。
 
@@ -2886,7 +2874,7 @@ data URI 跟自己不同源。
 
 前面有強調過 origin 是 null 跟 “null” 是不同的，因為 origin 確實有可能是字串的 null，例如說你開啟一個 `file:///` 開頭的網頁送出 request，或者是在 sandbox 的 iframe 裡面 AJAX：
 
-```html
+```markup
 <iframe sandbox='allow-scripts' srcdoc='
   <script>
     fetch("/test");
@@ -2900,7 +2888,7 @@ data URI 跟自己不同源。
 
 終於寫完這系列文了。
 
-希望大家在看完這系列之後有更理解 CORS 以及其他跨來源的相關概念，之後碰到 CORS 的錯誤都不再害怕，而且知道該怎麼解決。如同我在第一篇開頭說的，希望這系列文能成為 CORS 的寶典，每個碰到問題的人看完這個系列都可以迎刃而解。	
+希望大家在看完這系列之後有更理解 CORS 以及其他跨來源的相關概念，之後碰到 CORS 的錯誤都不再害怕，而且知道該怎麼解決。如同我在第一篇開頭說的，希望這系列文能成為 CORS 的寶典，每個碰到問題的人看完這個系列都可以迎刃而解。
 
 如果有任何錯誤或是缺漏的地方，可以再私訊或是留言跟我說，感謝。
 

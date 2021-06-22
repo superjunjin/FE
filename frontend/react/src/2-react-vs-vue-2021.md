@@ -1,6 +1,8 @@
-转自  [【译】重磅！React vs Vue 谁是 2021 年最佳 JavaScript 框架](https://juejin.cn/post/6944674279141146632)
+# 2-React-vs-Vue-2021
 
-https://dzone.com/articles/react-vs-vue-in-2021-best-javascript-framework
+转自 [【译】重磅！React vs Vue 谁是 2021 年最佳 JavaScript 框架](https://juejin.cn/post/6944674279141146632)
+
+[https://dzone.com/articles/react-vs-vue-in-2021-best-javascript-framework](https://dzone.com/articles/react-vs-vue-in-2021-best-javascript-framework)
 
 We’ve put together this convenient guide to help you better understand the use cases of Vue vs. React and determine which one will work best for your next project.
 
@@ -16,7 +18,7 @@ Both React and Vue are open source JavaScript frameworks that make it easier and
 
 React 和 Vue 都是开源的 JavaScript 框架，可以让开发者更容易、更快捷地构建复杂的用户界面。在对 React 和 Vue 进行比较之前，我们先对各自进行简要的概述。
 
-The React JavaScript library offers increased flexibility by utilizing 'components,' short, isolated sections of code that developers can use to create more complex logic and UIs. React interacts with HTML documents through a 'virtual DOM,'  which is a copy of the actual DOM, but all of the elements are represented as JavaScript objects. These elements, along with React’s declarative programming style and one-way data binding, simplify and speed up development.
+The React JavaScript library offers increased flexibility by utilizing 'components,' short, isolated sections of code that developers can use to create more complex logic and UIs. React interacts with HTML documents through a 'virtual DOM,' which is a copy of the actual DOM, but all of the elements are represented as JavaScript objects. These elements, along with React’s declarative programming style and one-way data binding, simplify and speed up development.
 
 React 框架通过使用 ‘组件’ 提供更多的灵活性，只需一小段独立的代码，开发就可以使用它来创建更复杂的逻辑和界面。React 通过“虚拟 DOM”（真实 DOM 的副本）与 HTML 文档交互，但是所有元素都表示为 JavaScript 对象。这些元素，加上 React 的声明式编程风格和单向数据绑定，简化并加速了开发。
 
@@ -26,7 +28,7 @@ Vue 也提供了双向绑定和组件，并使用了虚拟 DOM。然而，Vue �
 
 ## 相同点
 
-As you can see, Vue and React are quite similar to one another and have many of the same traits and features. The biggest similarity is the use of the virtual DOM. 
+As you can see, Vue and React are quite similar to one another and have many of the same traits and features. The biggest similarity is the use of the virtual DOM.
 
 如你所见，Vue 和 React 在许多特性和功能都非常相似，最大的相似点是使用虚拟 DOM。
 
@@ -34,33 +36,32 @@ In addition, **both** React and Vue:
 
 除此之外，React 和 Vue 还有如下相似点：
 
-- Work with any existing web app.
-- Suggest quite a lightweight approach for developers to quickly hop on work.
-- Feature component-based architecture with lifecycle methods.
-- Offer increased flexibility, speed, and performance.
-- Have large, active communities.
-- Offer a wide selection of libraries and tools.
-
-- 与任何现有 web app 协同工作。
-- 为开发人员提供一种轻量级的方法，让他们能够快速完成工作。
-- 提供具有生命周期方法的基于组件的体系架构。
-- 提供更好的灵活性、速度和性能。
-- 拥有庞大而活跃的社区。
-- 提供广泛的库和工具。
+* Work with any existing web app.
+* Suggest quite a lightweight approach for developers to quickly hop on work.
+* Feature component-based architecture with lifecycle methods.
+* Offer increased flexibility, speed, and performance.
+* Have large, active communities.
+* Offer a wide selection of libraries and tools.
+* 与任何现有 web app 协同工作。
+* 为开发人员提供一种轻量级的方法，让他们能够快速完成工作。
+* 提供具有生命周期方法的基于组件的体系架构。
+* 提供更好的灵活性、速度和性能。
+* 拥有庞大而活跃的社区。
+* 提供广泛的库和工具。
 
 ## 不同点
 
-While React.js and Vue.js have many similarities, there are a few differences between the two, which have a substantial impact on what each is best suited for. The primary difference lies in the methods used by Vue vs. React for rendering content onto the DOM. Vue uses HTML templates and JSX, while React only uses JSX, which is essentially an extension that allows you to insert HTML directly into JS code. While JSX can speed up and simplify larger, more complex tasks, the downside is that it can also complicate what should be an easy task. 
+While React.js and Vue.js have many similarities, there are a few differences between the two, which have a substantial impact on what each is best suited for. The primary difference lies in the methods used by Vue vs. React for rendering content onto the DOM. Vue uses HTML templates and JSX, while React only uses JSX, which is essentially an extension that allows you to insert HTML directly into JS code. While JSX can speed up and simplify larger, more complex tasks, the downside is that it can also complicate what should be an easy task.
 
 尽管 React.js 和 Vue.js 有许多相似之处，但两者之间还是有一些区别，这对各自最适用于什么场景产生了重大影响。 ==二者的主要区别在于将内容渲染到到 DOM 的方法。Vue 使用 HTML 模板和 JSX，而 React 仅使用 JSX==，这实际上是一个扩展，允许您将 HTML 直接插入到 JS 代码中。 尽管 JSX 可以加快开发并简化更大、更复杂的任务，但缺点是它也可能使本来应该容易的任务变得复杂。
 
-(对，react可能很难一眼看清楚html各个元素的位置和关系，因为插入了很多js去对html元素做处理。而vue的template可以大致清晰的理清html各个元素的位置和关系，类似原始的html)
+\(对，react可能很难一眼看清楚html各个元素的位置和关系，因为插入了很多js去对html元素做处理。而vue的template可以大致清晰的理清html各个元素的位置和关系，类似原始的html\)
 
-In addition, React’s core offerings are components, DOM manipulation, and component state management. Everything else is developed and supported by the community. While seasoned developers often prefer this level of freedom, newbies may feel overwhelmed by the abundance of third-party libraries and tools. 
+In addition, React’s core offerings are components, DOM manipulation, and component state management. Everything else is developed and supported by the community. While seasoned developers often prefer this level of freedom, newbies may feel overwhelmed by the abundance of third-party libraries and tools.
 
 此外，React 的核心是提供组件，DOM 操作和组件状态管理。其他一切都是由社区开发者支持的。虽然经验丰富的开发人员通常更喜欢这种自由度，但是新手可能会因大量的第三方库和工具而感到不知所措。
 
-While Vue has its own wide selection of community-built solutions, its core team also builds and supports commonly used tools and companion libraries, such as Vue-router, Vuex, and Vue CLI. This combination of pre-built and third-party resources helps meet the needs and desires of both beginner and senior developers alike. 
+While Vue has its own wide selection of community-built solutions, its core team also builds and supports commonly used tools and companion libraries, such as Vue-router, Vuex, and Vue CLI. This combination of pre-built and third-party resources helps meet the needs and desires of both beginner and senior developers alike.
 
 虽然 Vue 拥有广泛的社区构建方案可供选择，但其核心团队同样也构建并支持了常用工具和配套库，如 Vue-router、Vuex 和 Vue CLI。这种预构建资源和第三方资源的结合有助于满足初学者和高级开发人员的需求和愿望。
 
@@ -90,7 +91,7 @@ When considering the use of React vs. Vue for large applications, React has an e
 
 在考虑将 React 与 Vue 用于大型应用程序时，React 具有易扩展性，因此具有优势。由于 React 应用程序仅使用 JavaScript，因此开发人员可以利用传统的代码组织方式轻松地进行扩展。组件的可重用性增强了 React 的可扩展性。
 
-While Vue is also scalable, thanks to its wide selection of flexible tools, it is more often used in smaller applications (although the size of the app of course depends on the architecture). Due to the dynamic architecture, you will need to take advantage of Vue’s libraries and Mixin elements to overcome the scaling limitations. So if you’re considering a React vs. Vue enterprise application, React may be more accommodating of future growth.
+While Vue is also scalable, thanks to its wide selection of flexible tools, it is more often used in smaller applications \(although the size of the app of course depends on the architecture\). Due to the dynamic architecture, you will need to take advantage of Vue’s libraries and Mixin elements to overcome the scaling limitations. So if you’re considering a React vs. Vue enterprise application, React may be more accommodating of future growth.
 
 尽管 Vue 也具有可扩展性，但由于其广泛的灵活工具选择，它更常用于较小的应用程序中（尽管应用程序的大小取决于架构）。由于采用了动态架构，因此您将需要利用 Vue 的库和 Mixin 元素来克服扩展限制。因此，如果您正在考虑使用React 还是 Vue 作为企业应用程序，React 可能会更适应未来的增长。
 
@@ -124,27 +125,27 @@ Vue 是由开发人员创建的，而不是一家公司，所以它没有像 Rea
 
 **Vue** 用户包括：
 
-- Gitlab
-- Euronews
-- Adobe Portfolio
-- Behance
-- Alibaba
-- Trustpilot
-- Vice
-- Nintendo
-- BMW
+* Gitlab
+* Euronews
+* Adobe Portfolio
+* Behance
+* Alibaba
+* Trustpilot
+* Vice
+* Nintendo
+* BMW
 
 **React** 用户包括：
 
-- BBC
-- Airbnb
-- Facebook
-- PayPal
-- The New York Times
-- Netflix
-- Instagram
-- Twitter
-- WhatsApp
+* BBC
+* Airbnb
+* Facebook
+* PayPal
+* The New York Times
+* Netflix
+* Instagram
+* Twitter
+* WhatsApp
 
 ### 6. 安全性
 
@@ -186,28 +187,29 @@ Clearly, both are excellent frameworks for any modern web application, and the R
 
 **React** 是更好的选择如果您想要：
 
-- Have a wide variety of flexible libraries, tools, and ecosystems.
-- Easily use it with TypeScript, Flow, ReasonML, BuckleScript.
-- Develop a highly-scalable application with easy testing and debugging.
-- Quickly build a complex app.
-- Create a high-performing video streaming platform or media site.
-- 拥有多种灵活的库、工具和生态系统。
-- 轻松地搭配 TypeScript、Flow、ReasonML、BuckleScript 使用。
-- 开发一个易于测试和调试的高扩展性应用程序。
-- 快速构建一个复杂的应用程序。
-- 创建一个高性能的视频流媒体平台或媒体网站。
+* Have a wide variety of flexible libraries, tools, and ecosystems.
+* Easily use it with TypeScript, Flow, ReasonML, BuckleScript.
+* Develop a highly-scalable application with easy testing and debugging.
+* Quickly build a complex app.
+* Create a high-performing video streaming platform or media site.
+* 拥有多种灵活的库、工具和生态系统。
+* 轻松地搭配 TypeScript、Flow、ReasonML、BuckleScript 使用。
+* 开发一个易于测试和调试的高扩展性应用程序。
+* 快速构建一个复杂的应用程序。
+* 创建一个高性能的视频流媒体平台或媒体网站。
 
 选择 **Vue** 当你想：
 
-- Build a progressive web app or SPA.
-- Start development immediately.
-- Have access to more core tools and support.
-- Extend an existing app’s functionality.
-- 构建一个渐进式 web app 或 SPA。
-- 立即开始开发。
-- 获得更多的核心工具和支持。
-- 扩展现有 app 的功能。
+* Build a progressive web app or SPA.
+* Start development immediately.
+* Have access to more core tools and support.
+* Extend an existing app’s functionality.
+* 构建一个渐进式 web app 或 SPA。
+* 立即开始开发。
+* 获得更多的核心工具和支持。
+* 扩展现有 app 的功能。
 
 We hope this guide helps you settle the React.js vs. Vue.js debate for your next project. If you still have questions about the technologies, or you need a team of experienced developers to help create your project, send us a message using the form below!
 
 我们希望这个指南能帮助你决定在下一个项目中使用 React.js 还是 Vue.js。如果你还有关于技术的问题，或者你需要一个有经验的开发团队来帮助创建你的项目，请使用下面的表单给我们发送消息！
+
